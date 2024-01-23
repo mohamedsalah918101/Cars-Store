@@ -5,7 +5,14 @@ class SignUp extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mohamed Salah 11"),
+        title: Text(
+          "Sign Up",
+          style: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+              color: Colors.red
+          ),
+        ),
       ),
     );
   }
