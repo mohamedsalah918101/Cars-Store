@@ -1,6 +1,8 @@
 import 'package:cars_store/screens/home.dart';
 import 'package:cars_store/screens/sign_up.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class login extends StatefulWidget{
@@ -11,6 +13,9 @@ class login extends StatefulWidget{
 
 }
 class loginState extends State<login>{
+  String email = "";
+  String password = "";
+  var _auth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   void _showToast(String message) {
@@ -45,6 +50,9 @@ class loginState extends State<login>{
             TextField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
+              onChanged: (value){
+                email = value;
+              },
               decoration: InputDecoration(
                   labelText: "E-mail",
                   border: OutlineInputBorder(),
@@ -57,6 +65,9 @@ class loginState extends State<login>{
             TextField(
               controller: passwordController,
               keyboardType: TextInputType.visiblePassword,
+              onChanged: (value){
+                password = value;
+              },
               decoration: InputDecoration(
                   labelText: "Password",
                   border: OutlineInputBorder(),
@@ -69,17 +80,39 @@ class loginState extends State<login>{
             SizedBox(height: 40,),
             Center(
               child: ElevatedButton(
-                  onPressed: (){
-                    if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty)
-                    {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => home(),
-                          ));
-                    } else {
-                      _showToast("Please enter E-mail and Password");
-                    }
+                  onPressed: () async {
+                    try {
+                      if (emailController.text.isNotEmpty &&
+                          RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailController.text) &&
+                          passwordController.text.isNotEmpty) {
 
+                        await _auth.signInWithEmailAndPassword(
+                          email: email,
+                          password: password,
+                        );
+
+                        if(_auth.currentUser != null){
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          await prefs.setString("email", _auth.currentUser!.email.toString());
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => home()),
+                          );
+                        }
+                      } else {
+                        _showToast("Please enter E-mail and Password");
+                      }
+
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'user-not-found') {
+                        _showToast('User does not exist. Please sign up.');
+                      } else if (e.code == 'wrong-password') {
+                        _showToast('Incorrect password. Please try again.');
+                      } else {
+                        _showToast("User does not exist or Wrong password.");
+                      }
+                    }
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red),
