@@ -1,10 +1,9 @@
 import 'package:cars_store/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-
-String email = "";
+import 'package:get/get.dart';
 void main()  {
    runApp(
-        MaterialApp(
+        GetMaterialApp(
           debugShowCheckedModeBanner: false,
           home: splashScreen(),
         )

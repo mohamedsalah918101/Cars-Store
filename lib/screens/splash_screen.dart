@@ -12,7 +12,7 @@ class splashScreen extends StatelessWidget{
           splashTransition: SplashTransition.scaleTransition,
           splash: CircleAvatar(
             radius: 100,
-            backgroundImage: AssetImage("assets/images/car_logo.png"),
+            backgroundImage: AssetImage("assets/images/car2.png"),
             backgroundColor: Colors.white,
           ),
           nextScreen: login()

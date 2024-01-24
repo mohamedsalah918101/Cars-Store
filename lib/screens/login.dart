@@ -1,15 +1,10 @@
+import 'package:cars_store/screens/bottom_navigation.dart';
 import 'package:cars_store/screens/sign_up.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class login extends StatefulWidget{
-  @override
-  State<login> createState() {
-    return loginState();
-  }
-
-}
-class loginState extends State<login>{
+class login extends StatelessWidget{
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   void _showToast(String message) {
@@ -18,7 +13,7 @@ class loginState extends State<login>{
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
+      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
       textColor: Colors.white,
     );
   }
@@ -26,12 +21,14 @@ class loginState extends State<login>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Login2",
-          style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-              color: Colors.red
+        title: Center(
+          child: Text(
+            "Login",
+            style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(36, 54, 101, 1.0),
+            ),
           ),
         ),
       ),
@@ -46,9 +43,11 @@ class loginState extends State<login>{
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                   labelText: "E-mail",
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)
+                  ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                   )
               ),
             ),
@@ -58,9 +57,11 @@ class loginState extends State<login>{
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                   labelText: "Password",
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)
+                  ),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red)
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0))
                   )
               ),
               obscureText: true,
@@ -72,13 +73,13 @@ class loginState extends State<login>{
                       if (emailController.text.isNotEmpty &&
                           RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailController.text) &&
                           passwordController.text.isNotEmpty) {
-
+                        Get.offAll(() => bottomNavigation());
                       } else {
                         _showToast("Please enter E-mail and Password");
                       }
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    backgroundColor: MaterialStateProperty.all(Color.fromRGBO(36, 54, 101, 1.0)),
                   ),
                   child: Text(
                     "Login",
@@ -96,19 +97,19 @@ class loginState extends State<login>{
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Do not have an account? Please",
-                  style: TextStyle(fontSize: 15),
+                  "Do not have an account?",
+                  style: TextStyle(fontSize: 20),
                 ),
                 TextButton(onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUp(),
-                      ));
+                  Get.to(() => SignUp());
                 },
                     child: Text(
                       "Sign Up",
                       style: TextStyle(
-                          color: Colors.red,
+                        decoration: TextDecoration.underline,
+                          decorationColor: Color.fromRGBO(36, 54, 101, 1.0),
+                          decorationThickness: 2,
+                          color: Color.fromRGBO(36, 54, 101, 1.0),
                           fontSize: 20
                       ),
                     )

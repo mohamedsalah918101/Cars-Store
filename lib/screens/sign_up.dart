@@ -1,5 +1,7 @@
+import 'package:cars_store/screens/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class SignUp extends StatelessWidget {
   final TextEditingController fristName=TextEditingController();
@@ -14,7 +16,7 @@ class SignUp extends StatelessWidget {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
+      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
       textColor: Colors.white,
     );
   }
@@ -26,7 +28,7 @@ class SignUp extends StatelessWidget {
           child: Text(
             "Sign Up",
             style: TextStyle(
-                fontSize: 35, fontWeight: FontWeight.bold, color: Colors.red),
+                fontSize: 35, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
           ),
         ),
       ),
@@ -40,9 +42,11 @@ class SignUp extends StatelessWidget {
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                     labelText: "First Name",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -51,9 +55,11 @@ class SignUp extends StatelessWidget {
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                     labelText: "Last Name",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -62,9 +68,11 @@ class SignUp extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     labelText: "E-mail",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -73,9 +81,11 @@ class SignUp extends StatelessWidget {
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                     labelText: "Phone Number",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -85,9 +95,11 @@ class SignUp extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                     labelText: "Password",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -97,9 +109,11 @@ class SignUp extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                     labelText: "Confirm Password",
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red),
+                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -119,11 +133,11 @@ class SignUp extends StatelessWidget {
                     }else if(password.text!=confirmPassword.text){
                       _showToast('Please,Confirm your Password');
                     }else{
-        
+                      Get.offAll(() => bottomNavigation());
                     }
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                    backgroundColor: MaterialStateProperty.all(Color.fromRGBO(36, 54, 101, 1.0)),
                   ),
                   child: Text('Sign up',
                       style: TextStyle(
