@@ -27,7 +27,7 @@ class loginState extends State<login>{
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Login",
+          "Login2",
           style: TextStyle(
               fontSize: 35,
               fontWeight: FontWeight.bold,
