@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 
 class bottomNavigation extends StatelessWidget {
+
   final TextStyle unselectedLabelStyle = TextStyle(
       color: Colors.white.withOpacity(0.5),
       fontWeight: FontWeight.w500,
@@ -71,10 +72,8 @@ class bottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final BottomNavigationController bottomNavigationController =
     Get.put(BottomNavigationController(), permanent: false);
-
     return SafeArea(
         child: Scaffold(
           bottomNavigationBar:

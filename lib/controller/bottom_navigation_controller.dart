@@ -16,3 +16,4 @@ class BottomNavigationController extends GetxController {
     super.dispose();
   }
 }
+

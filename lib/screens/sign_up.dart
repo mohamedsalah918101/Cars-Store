@@ -4,12 +4,15 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class SignUp extends StatelessWidget {
-  final TextEditingController fristName=TextEditingController();
+  final TextEditingController firstName=TextEditingController();
   final TextEditingController lastName=TextEditingController();
   final TextEditingController email=TextEditingController();
   final TextEditingController phoneNumber=TextEditingController();
   final TextEditingController password=TextEditingController();
   final TextEditingController confirmPassword=TextEditingController();
+
+  // final SignUpController signUpController = Get.put(SignUpController());
+
   void _showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -38,8 +41,9 @@ class SignUp extends StatelessWidget {
           child: Column(
             children: [
               TextField(
-                controller: fristName,
+                controller: firstName,
                 keyboardType: TextInputType.name,
+                // onChanged: (value) => signUpController.firstName.value = value,
                 decoration: InputDecoration(
                     labelText: "First Name",
                     border: OutlineInputBorder(
@@ -53,6 +57,7 @@ class SignUp extends StatelessWidget {
               TextField(
                 controller:lastName,
                 keyboardType: TextInputType.name,
+                // onChanged: (value) => signUpController.lastName.value = value,
                 decoration: InputDecoration(
                     labelText: "Last Name",
                     border: OutlineInputBorder(
@@ -66,6 +71,7 @@ class SignUp extends StatelessWidget {
               TextField(
                 controller: email,
                 keyboardType: TextInputType.emailAddress,
+                // onChanged: (value) => signUpController.email.value = value,
                 decoration: InputDecoration(
                     labelText: "E-mail",
                     border: OutlineInputBorder(
@@ -79,6 +85,7 @@ class SignUp extends StatelessWidget {
               TextField(
                 controller: phoneNumber,
                 keyboardType: TextInputType.phone,
+                // onChanged: (value) => signUpController.phoneNumber.value = value,
                 decoration: InputDecoration(
                     labelText: "Phone Number",
                     border: OutlineInputBorder(
@@ -119,7 +126,7 @@ class SignUp extends StatelessWidget {
               SizedBox(height: 20),
               TextButton(
                   onPressed: () {
-                    if(fristName.text.isEmpty){
+                    if(firstName.text.isEmpty){
                       _showToast('Please,Enter your First Name');
                     }else if(lastName.text.isEmpty){
                       _showToast('Please,Enter your Last Name');
@@ -133,7 +140,12 @@ class SignUp extends StatelessWidget {
                     }else if(password.text!=confirmPassword.text){
                       _showToast('Please,Confirm your Password');
                     }else{
-                      Get.offAll(() => bottomNavigation());
+                      Get.offAll(() => bottomNavigation(), arguments: [
+                        firstName.text,
+                        lastName.text,
+                        email.text,
+                        phoneNumber.text
+                      ]);
                     }
                   },
                   style: ButtonStyle(
