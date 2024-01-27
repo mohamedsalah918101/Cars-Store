@@ -49,11 +49,9 @@ class userAccount extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Center(
-              child: Text(
-                "E-mail: ${userDetails[2]}",
-                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-              ),
+            Text(
+              "E-mail: ${userDetails[2]}",
+              style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 20,
