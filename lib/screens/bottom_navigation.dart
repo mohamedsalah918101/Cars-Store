@@ -71,10 +71,8 @@ class bottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final BottomNavigationController bottomNavigationController =
     Get.put(BottomNavigationController(), permanent: false);
-
     return SafeArea(
         child: Scaffold(
           bottomNavigationBar:
