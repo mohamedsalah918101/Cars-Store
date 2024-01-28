@@ -12,10 +12,9 @@ class userAccount extends StatelessWidget {
     firestoreController.getUser();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
         title: Text(
           "Account",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Color.fromRGBO(36, 54, 101, 1.0)),
         ),
       ),
       body: Padding(
@@ -28,28 +27,28 @@ class userAccount extends StatelessWidget {
               child: CircleAvatar(
                 radius: 80,
                 backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.account_circle,
-                  size: 160,
-                  color: Color.fromRGBO(36, 54, 101, 1.0),
-                ),
+                backgroundImage: AssetImage("assets/images/avatar.png"),
               ),
             ),
             SizedBox(
               height: 20,
             ),
             Obx((){
-              return Text(
-                "First Name: ${firestoreController.user.value.firstName}",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              return Center(
+                child: Text(
+                  "${firestoreController.user.value.firstName}",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
+                ),
               );
             }),
             SizedBox(
-              height: 20,
+              height: 5,
             ),Obx((){
-              return Text(
-                "Last Name: ${firestoreController.user.value.lastName}",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              return Center(
+                child: Text(
+                  "${firestoreController.user.value.lastName}",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
+                ),
               );
             })
             ,
@@ -57,18 +56,24 @@ class userAccount extends StatelessWidget {
               height: 20,
             ),
             Obx((){
-              return Text(
-                "E-mail: ${firestoreController.user.value.email}",
-                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+              return Card(
+                color: Color.fromRGBO(36, 54, 101, 1.0),
+                child: ListTile(
+                    leading: Icon(Icons.mail, color: Colors.white,),
+                  title: Text("${firestoreController.user.value.email}", style: TextStyle(fontSize: 20, color: Colors.white),),
+                ),
               );
             }),
             SizedBox(
               height: 20,
             ),
             Obx((){
-              return Text(
-                "Phone Number: ${firestoreController.user.value.phoneNumber}",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              return Card(
+                color: Color.fromRGBO(36, 54, 101, 1.0),
+                child: ListTile(
+                  leading: Icon(Icons.phone, color: Colors.white,),
+                  title: Text("${firestoreController.user.value.phoneNumber}",style: TextStyle(fontSize: 20, color: Colors.white),),
+                ),
               );
             }),
             SizedBox(height: 50,),

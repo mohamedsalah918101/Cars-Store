@@ -5,10 +5,9 @@ class favoritesCars extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
         title: Text(
             "Favorites",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Color.fromRGBO(36, 54, 101, 1.0)),
         ),
       ),
     );

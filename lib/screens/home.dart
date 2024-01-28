@@ -8,9 +8,8 @@ class home extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-        title: Text("Home Page",
-        style: TextStyle(color: Colors.white),),
+        title: Text("Home",
+        style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Color.fromRGBO(36, 54, 101, 1.0)),),
       ),
       body: Center(
         child: Text(
