@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreController extends GetxController {
-  var _user = UserModel().obs;
+  var user = UserModel().obs;
   var _posts = <PostModel>[].obs;
   var _firestore = FirebaseFirestore.instance;
   var _auth = FirebaseAuth.instance;
@@ -14,7 +14,7 @@ class FirestoreController extends GetxController {
       final snapshot =
           await _firestore.collection('users').doc(_auth.currentUser?.uid);
       snapshot.get().then((value) {
-        _user.value = UserModel.fromMap(value.id, value.data());
+        user.value = UserModel.fromMap(value.id, value.data());
       });
     } catch (e) {}
   }

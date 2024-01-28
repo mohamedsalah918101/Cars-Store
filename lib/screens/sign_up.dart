@@ -157,7 +157,7 @@ class SignUp extends StatelessWidget {
                             phoneNumber: phoneNumber.text,
                             email: email.text);
                         await firestoreController.addUser(user);
-                        await Get.offAll(() => bottomNavigation());
+                        Get.offAll(() => bottomNavigation());
                       }
                     }
                   },
