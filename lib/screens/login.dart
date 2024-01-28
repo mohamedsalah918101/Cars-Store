@@ -1,12 +1,18 @@
+import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/screens/bottom_navigation.dart';
 import 'package:cars_store/screens/sign_up.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class login extends StatelessWidget{
+class login extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FirestoreController firestoreController =
+      Get.put(FirestoreController());
+  var _auth = FirebaseAuth.instance;
+
   void _showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -17,6 +23,7 @@ class login extends StatelessWidget{
       textColor: Colors.white,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +32,9 @@ class login extends StatelessWidget{
           child: Text(
             "Login",
             style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(36, 54, 101, 1.0),
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+              color: Color.fromRGBO(36, 54, 101, 1.0),
             ),
           ),
         ),
@@ -44,42 +51,54 @@ class login extends StatelessWidget{
               decoration: InputDecoration(
                   labelText: "E-mail",
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
+                      borderRadius: BorderRadius.circular(10)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
-                  )
-              ),
+                    borderSide:
+                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                  )),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             TextField(
               controller: passwordController,
               keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                   labelText: "Password",
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
+                      borderRadius: BorderRadius.circular(10)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0))
-                  )
-              ),
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)))),
               obscureText: true,
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             Center(
               child: ElevatedButton(
-                  onPressed: ()  {
-                      if (emailController.text.isNotEmpty &&
-                          RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailController.text) &&
-                          passwordController.text.isNotEmpty) {
-                        Get.offAll(() => bottomNavigation());
-                      } else {
-                        _showToast("Please enter E-mail and Password");
+                  onPressed: () async {
+                    if (emailController.text.isNotEmpty &&
+                        RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(emailController.text) &&
+                        passwordController.text.isNotEmpty) {
+                      try {
+                        await _auth.signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text);
+                      } catch (e) {
+                        _showToast('Wrong Email and Password');
                       }
+                      if (_auth.currentUser != null) {
+                        Get.offAll(() => bottomNavigation());
+                      }
+                    } else {
+                      _showToast("Please enter E-mail and Password");
+                    }
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Color.fromRGBO(36, 54, 101, 1.0)),
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromRGBO(36, 54, 101, 1.0)),
                   ),
                   child: Text(
                     "Login",
@@ -88,10 +107,11 @@ class login extends StatelessWidget{
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-                  )
-              ),
+                  )),
             ),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,20 +120,19 @@ class login extends StatelessWidget{
                   "Do not have an account?",
                   style: TextStyle(fontSize: 20),
                 ),
-                TextButton(onPressed: (){
-                  Get.to(() => SignUp());
-                },
+                TextButton(
+                    onPressed: () {
+                      Get.to(() => SignUp());
+                    },
                     child: Text(
                       "Sign Up",
                       style: TextStyle(
-                        decoration: TextDecoration.underline,
+                          decoration: TextDecoration.underline,
                           decorationColor: Color.fromRGBO(36, 54, 101, 1.0),
                           decorationThickness: 2,
                           color: Color.fromRGBO(36, 54, 101, 1.0),
-                          fontSize: 20
-                      ),
-                    )
-                )
+                          fontSize: 20),
+                    ))
               ],
             )
           ],
@@ -121,5 +140,4 @@ class login extends StatelessWidget{
       ),
     );
   }
-
 }
