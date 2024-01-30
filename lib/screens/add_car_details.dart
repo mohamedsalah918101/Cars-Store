@@ -1,17 +1,16 @@
-import 'dart:io';
-import 'package:cars_store/controller/gallery_controller.dart';
+
+import 'package:cars_store/controller/image_picker_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class AddPost extends StatelessWidget {
   final TextEditingController model = TextEditingController();
   final TextEditingController color = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController decription = TextEditingController();
-  final GalleryController galleryController = Get.put(GalleryController());
   List<String> _bodyTypeItems=['4x4','Cabriolet','Coupe','Hatchback','Other','Pickup','SUV','Sedan','Van/Bus'];
   List<String> _brandItems = [
     'Alfa Romeo',
@@ -190,6 +189,7 @@ class AddPost extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ImagePickerController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
@@ -434,13 +434,7 @@ class AddPost extends StatelessWidget {
               SizedBox(height: 20,),
               ElevatedButton(
                 onPressed: () async {
-                  List<XFile>? pickedImages = await ImagePicker().pickMultiImage();
-
-                  if (pickedImages != null) {
-                    for (var image in pickedImages) {
-                      galleryController.addPhoto(image.path);
-                    }
-                  }
+                  controller.pickImages();
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromRGBO(36, 54, 101, 1.0),
@@ -470,7 +464,7 @@ class AddPost extends StatelessWidget {
                         height: 100,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                            itemCount: galleryController.selectedPhotos.length,
+                            itemCount: controller.images.length,
                             itemBuilder: (context, index){
                               return Padding(
                                   padding: const EdgeInsets.all(8),
@@ -485,7 +479,7 @@ class AddPost extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(6),
                                     child: Image.file(
-                                      File(galleryController.selectedPhotos[index]),
+                                      controller.images[index],
                                       width: 80,
                                       height: 80,
                                       fit: BoxFit.cover,
@@ -500,7 +494,7 @@ class AddPost extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              TextButton(onPressed: (){
+              TextButton(onPressed: () async {
                 if(brand==null){
                   _showToast('Please,Enter your Car Brand');
                 }else if(model.text.isEmpty){
@@ -528,7 +522,16 @@ class AddPost extends StatelessWidget {
                 }else if(decription.text.length<20){
                   _showToast('Please, Enter a Description over 20 letter');
                 }else{
+                  List<String> downloadURLs = await controller.uploadImagesToFirebase();
+                  print("Download URLs: $downloadURLs");
 
+                  // for(var url in controller.networkImages)
+                  //   Image.network(
+                  //     url.toString(),
+                  //     width: 50,
+                  //     height: 50,
+                  //     fit: BoxFit.cover,
+                  //   );
                 }
               }, child: Text('Add Post',style: TextStyle(
                 fontSize: 25,

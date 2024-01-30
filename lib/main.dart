@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:cars_store/screens/bottom_navigation.dart';
 import 'package:cars_store/screens/sign_up.dart';
 import 'package:cars_store/screens/splash_screen.dart';
@@ -5,6 +8,8 @@ import 'package:cars_store/screens/user_account.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

@@ -55,7 +55,9 @@ dev_dependencies:
   shared_preferences: ^2.2.2
   get: ^4.6.6
   datepicker_dropdown: ^0.0.9
-  image_picker: ^1.0.7
+  image_picker: ^0.8.6
+  firebase_storage: ^11.6.0
+  path: ^1.8.3
   flutter_image_slideshow: ^0.1.6
   url_launcher: ^6.2.4
 
