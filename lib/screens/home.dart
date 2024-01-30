@@ -16,29 +16,45 @@ class home extends StatelessWidget{
       body: ListView.builder(
         itemCount: 10,
           itemBuilder: (context, index){
-            return  Card(
-              color: Colors.white,
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: ListTile(
-                contentPadding: EdgeInsets.all(16),
-                leading: Container(
-                  width: 150,
-                  height: 150,
-                  child: Image.asset(
-                    "assets/images/car_example.webp",
-                    fit: BoxFit.cover,
-                  ),
+            return  GestureDetector(
+              onTap: (){
+                Get.to(() => ShowDetails(index));
+              },
+              child: Card(
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        "assets/images/car_example.webp",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    ListTile(
+                      contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                      title: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text("Ferrari ${index}", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
+                      ),
+                      subtitle: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text("\$10,000", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text("Cairo, Egypt", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text("2 days ago", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.grey)))
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                title: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text("Ferrari ${index}", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
-                ),
-                subtitle: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text("\$10,000", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-                onTap: (){
-                  Get.to(() => ShowDetails(index));
-                },
               ),
             );
           }
