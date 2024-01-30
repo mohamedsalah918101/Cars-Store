@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cars_store/controller/gallery_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
