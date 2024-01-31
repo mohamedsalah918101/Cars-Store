@@ -539,10 +539,17 @@ class AddPost extends StatelessWidget {
                     } else if (decription.text.length < 20) {
                       _showToast('Please, Enter a Description over 20 letter');
                     } else {
+                      Get.snackbar(
+                        'Loading.......',
+                        'Please Wait',
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.blue[900],
+                        colorText: Colors.white,
+                        duration: Duration(seconds: 10),
+                      );
                       List<String> downloadURLs =
                           await controller.uploadImagesToFirebase();
                       print("Download URLs: $downloadURLs");
-                      ////show dialog
                       await firestoreController.getUser();
                       UserModel currentUser=firestoreController.user.value;
                       PostModel post = PostModel(
