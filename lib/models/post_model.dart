@@ -38,26 +38,28 @@ class PostModel {
       this.ownerMobile,
       this.time});
 
-  factory PostModel.fromMap(String postId, Map<String, dynamic>? snapshot) {
-    return PostModel(
-        id: postId,
-        images: snapshot!['images'],
-        brand: snapshot!['brand'],
-        year: snapshot!['year'],
-        bodyType: snapshot!['body type'],
-        model: snapshot!['model'],
-        cylinders: snapshot!['cylinders'],
-        engineCapacity: snapshot!['engine capacity'],
-        fuelType: snapshot!['fuel type'],
-        transmissionType: snapshot!['transmission type'],
-        color: snapshot!['color'],
-        kilometers: snapshot!['kilometers'],
-        price: snapshot!['price'],
-        location: snapshot!['location'],
-        description: snapshot!['description'],
-        ownerName: snapshot!['owner name'],
-        ownerMobile: snapshot!['owner mobile'],
-        time: snapshot['date']);
+   PostModel.fromMap(String postId, Map<String, dynamic>? snapshot) {
+        id= postId;
+        images = <String>[];
+        snapshot!['images'].forEach((v) {
+          images!.add(v);
+        });
+        brand= snapshot!['brand'];
+        year= snapshot!['year'];
+        bodyType=snapshot!['body type'];
+        model= snapshot!['model'];
+        cylinders= snapshot!['cylinders'];
+        engineCapacity= snapshot!['engine capacity'];
+        fuelType= snapshot!['fuel type'];
+        transmissionType= snapshot!['transmission type'];
+        color=snapshot!['color'];
+        kilometers=snapshot!['kilometers'];
+        price= snapshot!['price'];
+        location= snapshot!['location'];
+        description= snapshot!['description'];
+        ownerName= snapshot!['owner name'];
+        ownerMobile= snapshot!['owner mobile'];
+        time= snapshot['date'].toDate();
   }
 
   Map<String, dynamic> toMap() {

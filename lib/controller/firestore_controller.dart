@@ -6,9 +6,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreController extends GetxController {
   var user = UserModel().obs;
-  var _posts = <PostModel>[].obs;
+  var posts = <PostModel>[].obs;
+  var post = PostModel().obs;
   var _firestore = FirebaseFirestore.instance;
   var _auth = FirebaseAuth.instance;
+
   Future<void> getUser() async {
     try {
       final snapshot =
@@ -30,14 +32,26 @@ class FirestoreController extends GetxController {
     }
   }
 
-  Future<void> getPosts() async {
+  getPostById(String id) async {
     try {
-      final snapshot = await _firestore.collectionGroup('posts').get();
-      _posts.assignAll(snapshot.docs.map((doc) {
-        return PostModel.fromMap(doc.id, doc.data());
-      }).toList());
-    } catch (e) {
-    }
+      final snapshot = await _firestore
+          .collection('users')
+          .doc(_auth.currentUser?.uid)
+          .collection('posts')
+          .doc(id);
+      snapshot.get().then((value){
+            post.value=PostModel.fromMap(value.id, value.data());
+      });
+    } catch (e) {}
+  }
+
+  Future<void> getPosts() async {
+    final snapshot = await _firestore.collectionGroup('posts').get();
+    print('Docssss:${snapshot.docs}');
+    posts.assignAll(snapshot.docs.map((doc) {
+      return PostModel.fromMap(doc.id, doc.data());
+    }).toList());
+    print('possssstssss${posts[0].images}');
   }
 
   Future<void> addPost(PostModel post) async {

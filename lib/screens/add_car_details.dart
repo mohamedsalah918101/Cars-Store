@@ -1,17 +1,32 @@
-
+import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/controller/image_picker_controller.dart';
+import 'package:cars_store/models/post_model.dart';
+import 'package:cars_store/models/user_model.dart';
+import 'package:cars_store/screens/bottom_navigation.dart';
+import 'package:cars_store/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
 
 class AddPost extends StatelessWidget {
   final TextEditingController model = TextEditingController();
   final TextEditingController color = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController decription = TextEditingController();
-  List<String> _bodyTypeItems=['4x4','Cabriolet','Coupe','Hatchback','Other','Pickup','SUV','Sedan','Van/Bus'];
+  final FirestoreController firestoreController =
+      Get.put(FirestoreController());
+  List<String> _bodyTypeItems = [
+    '4x4',
+    'Cabriolet',
+    'Coupe',
+    'Hatchback',
+    'Other',
+    'Pickup',
+    'SUV',
+    'Sedan',
+    'Van/Bus'
+  ];
   List<String> _brandItems = [
     'Alfa Romeo',
     'Aston Martin',
@@ -177,6 +192,7 @@ class AddPost extends StatelessWidget {
   String? location;
   String? brand;
   String? bodyType;
+
   void _showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -187,6 +203,7 @@ class AddPost extends StatelessWidget {
       textColor: Colors.white,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ImagePickerController());
@@ -210,7 +227,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _brandItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -232,7 +249,7 @@ class AddPost extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -243,7 +260,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _bodyTypeItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -259,8 +276,8 @@ class AddPost extends StatelessWidget {
               DropdownDatePicker(
                 showDay: false,
                 showMonth: false,
-                onChangedYear: (value){
-                  year=value;
+                onChangedYear: (value) {
+                  year = value;
                 },
                 inputDecoration: InputDecoration(
                     labelText: "Year",
@@ -268,7 +285,7 @@ class AddPost extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -279,7 +296,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _cylindersItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -299,7 +316,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _engineCapcityItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -319,7 +336,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _fuelTypeItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -339,7 +356,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _transmissionTypeItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -361,7 +378,7 @@ class AddPost extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -372,7 +389,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _kilometersItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -394,7 +411,7 @@ class AddPost extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(height: 20),
@@ -405,7 +422,7 @@ class AddPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                   items: _locationItems.map((String num) {
                     return DropdownMenuItem<String>(
@@ -428,21 +445,22 @@ class AddPost extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 onPressed: () async {
                   controller.pickImages();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromRGBO(36, 54, 101, 1.0),
-                  onPrimary: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  )
-                ),
+                    primary: Color.fromRGBO(36, 54, 101, 1.0),
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    )),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -450,98 +468,123 @@ class AddPost extends StatelessWidget {
                       Icons.photo,
                       size: 24,
                     ),
-                    SizedBox(width: 8,),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Text(
-                        "Add Car Photos",
+                      "Add Car Photos",
                       style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 20),
-              Obx(
-                      () => Container(
-                        height: 100,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                            itemCount: controller.images.length,
-                            itemBuilder: (context, index){
-                              return Padding(
-                                  padding: const EdgeInsets.all(8),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Color.fromRGBO(36, 54, 101, 1.0),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
+              Obx(() => Container(
+                    height: 100,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.images.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color.fromRGBO(36, 54, 101, 1.0),
+                                    width: 2,
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(6),
-                                    child: Image.file(
-                                      controller.images[index],
-                                      width: 80,
-                                      height: 80,
-                                      fit: BoxFit.cover,
-                                    ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Image.file(
+                                    controller.images[index],
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
                                   ),
-                                )
-                              );
-                            }
-                        ),
-                      )
-              ),
+                                ),
+                              ));
+                        }),
+                  )),
               SizedBox(
                 height: 20,
               ),
-              TextButton(onPressed: () async {
-                if(brand==null){
-                  _showToast('Please,Enter your Car Brand');
-                }else if(model.text.isEmpty){
-                  _showToast('Please, Enter your Car Model');
-                }else if(bodyType==null){
-                  _showToast('Please, Enter your Car Body Type');
-                }else if(year==null){
-                  _showToast('Please, Enter your Car Model Year');
-                }else if(cylinders==null){
-                  _showToast('Please, Enter your Car number of Cylinders');
-                }else if(engineCapcity==null){
-                  _showToast('Please, Enter your Car Engine Capacity');
-                }else if(fuelType==null){
-                  _showToast('Please, Enter your Car Fuel Type');
-                }else if(transmissionType==null){
-                  _showToast('Please, Enter your Car Transmission Type');
-                }else if(color.text.isEmpty){
-                  _showToast('Please, Enter your Car Color');
-                }else if(kilometers==null){
-                  _showToast('Please, Enter your Car Kilometers');
-                }else if(price.text.isEmpty){
-                  _showToast('Please, Enter your Car Price');
-                }else if(location==null){
-                  _showToast('Please, Enter Your Location');
-                }else if(decription.text.length<20){
-                  _showToast('Please, Enter a Description over 20 letter');
-                }else{
-                  List<String> downloadURLs = await controller.uploadImagesToFirebase();
-                  print("Download URLs: $downloadURLs");
+              TextButton(
+                  onPressed: () async {
+                    if (brand == null) {
+                      _showToast('Please,Enter your Car Brand');
+                    } else if (model.text.isEmpty) {
+                      _showToast('Please, Enter your Car Model');
+                    } else if (bodyType == null) {
+                      _showToast('Please, Enter your Car Body Type');
+                    } else if (year == null) {
+                      _showToast('Please, Enter your Car Model Year');
+                    } else if (cylinders == null) {
+                      _showToast('Please, Enter your Car number of Cylinders');
+                    } else if (engineCapcity == null) {
+                      _showToast('Please, Enter your Car Engine Capacity');
+                    } else if (fuelType == null) {
+                      _showToast('Please, Enter your Car Fuel Type');
+                    } else if (transmissionType == null) {
+                      _showToast('Please, Enter your Car Transmission Type');
+                    } else if (color.text.isEmpty) {
+                      _showToast('Please, Enter your Car Color');
+                    } else if (kilometers == null) {
+                      _showToast('Please, Enter your Car Kilometers');
+                    } else if (price.text.isEmpty) {
+                      _showToast('Please, Enter your Car Price');
+                    } else if (location == null) {
+                      _showToast('Please, Enter Your Location');
+                    } else if (decription.text.length < 20) {
+                      _showToast('Please, Enter a Description over 20 letter');
+                    } else {
+                      List<String> downloadURLs =
+                          await controller.uploadImagesToFirebase();
+                      print("Download URLs: $downloadURLs");
+                      ////show dialog
+                      await firestoreController.getUser();
+                      UserModel currentUser=firestoreController.user.value;
+                      PostModel post = PostModel(
+                          brand: brand,
+                          model: model.text,
+                          year: year,
+                          bodyType: bodyType,
+                          cylinders: cylinders,
+                          engineCapacity: engineCapcity,
+                          fuelType: fuelType,
+                          color: color.text,
+                          transmissionType: transmissionType,
+                          kilometers: kilometers,
+                          price: price.text,
+                          location: location,
+                          description: decription.text,
+                      time: DateTime.now(),
+                      ownerName: currentUser.firstName!+' '+currentUser.lastName!,
+                      ownerMobile: currentUser.phoneNumber,
+                      images: downloadURLs);
+                      await firestoreController.addPost(post);
+                      await Get.offAll(bottomNavigation());
 
-                  // for(var url in controller.networkImages)
-                  //   Image.network(
-                  //     url.toString(),
-                  //     width: 50,
-                  //     height: 50,
-                  //     fit: BoxFit.cover,
-                  //   );
-                }
-              }, child: Text('Add Post',style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              )),style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Color.fromRGBO(36, 54, 101, 1.0)),
-              )),
-
+                      // for(var url in controller.networkImages)
+                      //   Image.network(
+                      //     url.toString(),
+                      //     width: 50,
+                      //     height: 50,
+                      //     fit: BoxFit.cover,
+                      //   );
+                    }
+                  },
+                  child: Text('Add Post',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromRGBO(36, 54, 101, 1.0)),
+                  )),
             ],
           ),
         ),

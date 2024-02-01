@@ -1,19 +1,25 @@
+import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/screens/add_car_details.dart';
 import 'package:cars_store/screens/show_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/post_model.dart';
+
 class home extends StatelessWidget{
-  final List<int> favoriteCars = [];
+  final FirestoreController firestoreController=Get.put(FirestoreController());
+  List<PostModel>? posts;
   @override
   Widget build(BuildContext context) {
+    firestoreController.getPosts();
+    print('Posts:${firestoreController.posts.length}');
     return Scaffold(
       appBar: AppBar(
         title: Text("Home",
         style: TextStyle(fontWeight: FontWeight.bold,fontSize: 35,color: Color.fromRGBO(36, 54, 101, 1.0)),),
 
       ),
-      body: SingleChildScrollView(
+      body:  SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 10,),
@@ -21,14 +27,14 @@ class home extends StatelessWidget{
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text('Posts',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
             ),
-            ListView.builder(
+           Obx(() => ListView.builder(
               shrinkWrap: true,
               physics:NeverScrollableScrollPhysics() ,
-              itemCount: 10,
+              itemCount: firestoreController.posts.length,
                 itemBuilder: (context, index){
                   return  GestureDetector(
                     onTap: (){
-                      Get.to(() => ShowDetails(index));
+                      Get.to(() => ShowDetails(firestoreController.posts[index]));
                     },
                     child: Card(
                       color: Colors.white,
@@ -37,8 +43,8 @@ class home extends StatelessWidget{
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.asset(
-                              "assets/images/car_example.webp",
+                            child: Image.network(
+                              firestoreController.posts[index].images![0],
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -46,20 +52,20 @@ class home extends StatelessWidget{
                             contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
                             title: Align(
                                 alignment: Alignment.topLeft,
-                                child: Text("Ferrari ${index}", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
+                                child: Text('${firestoreController.posts[index].brand} ${firestoreController.posts[index].model} ${firestoreController.posts[index].year}', style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),)
                             ),
                             subtitle: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text("EGP 10,000", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                                    child: Text("EGP ${firestoreController.posts[index].price}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
                                 Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text("Cairo, Egypt", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
+                                    child: Text(firestoreController.posts[index].location.toString(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))),
                                 Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text("2 days ago", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.grey)))
+                                    child: Text('${firestoreController.posts[index].time!.day}/${firestoreController.posts[index].time!.month}/${firestoreController.posts[index].time!.year}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.grey)))
                               ],
                             ),
                           ),
@@ -68,7 +74,7 @@ class home extends StatelessWidget{
                     ),
                   );
                 }
-            ),
+            )),
           ],
         ),
       ),
