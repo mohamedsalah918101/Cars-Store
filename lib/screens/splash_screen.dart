@@ -14,7 +14,7 @@ class splashScreen extends StatelessWidget{
           splashTransition: SplashTransition.scaleTransition,
           splash: CircleAvatar(
             radius: 100,
-            backgroundImage: AssetImage("assets/images/car2.png"),
+            backgroundImage: AssetImage("assets/images/blue.jpg"),
             backgroundColor: Colors.white,
           ),
           nextScreen: _auth.currentUser==null? login():bottomNavigation()

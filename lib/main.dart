@@ -13,6 +13,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: "carstore",
       options: FirebaseOptions(
           apiKey: "AIzaSyD8qOtONA0QI1KzsZrG0NaqdgpRck4dEOU",
           authDomain: "carstore-16676.firebaseapp.com",
