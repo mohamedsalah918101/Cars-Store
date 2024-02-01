@@ -42,7 +42,8 @@ class FirestoreController extends GetxController {
       snapshot.get().then((value){
             post.value=PostModel.fromMap(value.id, value.data());
       });
-    } catch (e) {}
+    } catch (e) {
+    }
   }
 
   Future<void> getPosts() async {

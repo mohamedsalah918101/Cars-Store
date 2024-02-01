@@ -192,7 +192,7 @@ class AddPost extends StatelessWidget {
   String? location;
   String? brand;
   String? bodyType;
-
+  SnackbarController? snackbarController;
   void _showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -538,14 +538,16 @@ class AddPost extends StatelessWidget {
                       _showToast('Please, Enter Your Location');
                     } else if (decription.text.length < 20) {
                       _showToast('Please, Enter a Description over 20 letter');
-                    } else {
-                      Get.snackbar(
+                    } else if(controller.images.isEmpty){
+                      _showToast('Plesae, Pick Car Images');
+                    }else {
+                      snackbarController=Get.snackbar(
                         'Loading.......',
                         'Please Wait',
                         snackPosition: SnackPosition.BOTTOM,
                         backgroundColor: Colors.blue[900],
                         colorText: Colors.white,
-                        duration: Duration(seconds: 10),
+                        duration: Duration(minutes: 60)
                       );
                       List<String> downloadURLs =
                           await controller.uploadImagesToFirebase();
@@ -571,6 +573,7 @@ class AddPost extends StatelessWidget {
                       ownerMobile: currentUser.phoneNumber,
                       images: downloadURLs);
                       await firestoreController.addPost(post);
+                      await snackbarController!.close();
                       await Get.offAll(bottomNavigation());
 
                       // for(var url in controller.networkImages)
