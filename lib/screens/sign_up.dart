@@ -148,6 +148,7 @@ class SignUp extends StatelessWidget {
                         await _auth.createUserWithEmailAndPassword(
                             email: email.text, password: password.text);
                       } catch (e) {
+                        print('erorrr: $e');
                         _showToast('Failed to Sign Up ,Try Again');
                       }
                       if (_auth.currentUser != null) {
@@ -155,7 +156,7 @@ class SignUp extends StatelessWidget {
                             firstName: fristName.text,
                             lastName: lastName.text,
                             phoneNumber: phoneNumber.text,
-                            email: email.text);
+                            email: email.text,favourites: <String>[]);
                         await firestoreController.addUser(user);
                         Get.offAll(() => bottomNavigation());
                       }

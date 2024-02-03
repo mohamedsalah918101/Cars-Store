@@ -20,6 +20,27 @@ class FirestoreController extends GetxController {
       });
     } catch (e) {}
   }
+  Future<void> addRemoveFavourites(String? id)async {
+    try{
+      bool? exist;
+      await _firestore.collection('users').doc(_auth.currentUser?.uid).get().then((value){
+        if(value.data()?['favourites'].contains(id)){
+          exist=true ;
+        }else{
+          exist=false;
+        }
+      });
+      if(exist==true){
+        await _firestore.collection('users').doc(_auth.currentUser?.uid).update({
+          'favourites':FieldValue.arrayRemove([id])
+        });
+      }else{
+        await _firestore.collection('users').doc(_auth.currentUser?.uid).update({
+          'favourites':FieldValue.arrayUnion([id])
+        });
+      }
+    }catch(e){}
+  }
 
   Future<void> addUser(UserModel user) async {
     try {
@@ -29,20 +50,6 @@ class FirestoreController extends GetxController {
           .set(user.toMap());
     } catch (e) {
       print(e);
-    }
-  }
-
-  getPostById(String id) async {
-    try {
-      final snapshot = await _firestore
-          .collection('users')
-          .doc(_auth.currentUser?.uid)
-          .collection('posts')
-          .doc(id);
-      snapshot.get().then((value){
-            post.value=PostModel.fromMap(value.id, value.data());
-      });
-    } catch (e) {
     }
   }
 
