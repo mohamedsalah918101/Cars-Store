@@ -8,9 +8,9 @@ class FirestoreController extends GetxController {
   var user = UserModel().obs;
   var posts = <PostModel>[].obs;
   var post = PostModel().obs;
+  var favouritePosts=<PostModel>[].obs;
   var _firestore = FirebaseFirestore.instance;
   var _auth = FirebaseAuth.instance;
-
   Future<void> getUser() async {
     try {
       final snapshot =
@@ -20,16 +20,18 @@ class FirestoreController extends GetxController {
       });
     } catch (e) {}
   }
+   getFavouritePosts() {
+        print('favouriteDocsID:${user.value.favourites}');
+        favouritePosts.clear();
+        for(var post in posts){
+          if(user.value.favourites!.contains(post.id)){
+              favouritePosts.add(post);
+          }
+        }
+  }
   Future<void> addRemoveFavourites(String? id)async {
     try{
-      bool? exist;
-      await _firestore.collection('users').doc(_auth.currentUser?.uid).get().then((value){
-        if(value.data()?['favourites'].contains(id)){
-          exist=true ;
-        }else{
-          exist=false;
-        }
-      });
+      bool exist=user.value.isFavourited(id);
       if(exist==true){
         await _firestore.collection('users').doc(_auth.currentUser?.uid).update({
           'favourites':FieldValue.arrayRemove([id])
@@ -39,6 +41,7 @@ class FirestoreController extends GetxController {
           'favourites':FieldValue.arrayUnion([id])
         });
       }
+      getUser();
     }catch(e){}
   }
 
@@ -54,11 +57,12 @@ class FirestoreController extends GetxController {
   }
 
   Future<void> getPosts() async {
+    try{
     final snapshot = await _firestore.collectionGroup('posts').get();
     print('Docssss:${snapshot.docs}');
     posts.assignAll(snapshot.docs.map((doc) {
       return PostModel.fromMap(doc.id, doc.data());
-    }).toList());
+    }).toList());}catch(e){}
     print('possssstssss${posts[0].images}');
   }
 

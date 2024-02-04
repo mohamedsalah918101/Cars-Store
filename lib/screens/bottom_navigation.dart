@@ -1,4 +1,6 @@
 import 'package:cars_store/controller/bottom_navigation_controller.dart';
+import 'package:cars_store/controller/connectivity_controller.dart';
+import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/screens/favorites_cars.dart';
 import 'package:cars_store/screens/home.dart';
 import 'package:cars_store/screens/user_account.dart';
@@ -7,6 +9,8 @@ import 'package:get/get.dart';
 
 
 class bottomNavigation extends StatelessWidget {
+  final FirestoreController firestoreController=Get.put(FirestoreController());
+  final ConnectivityController connectivityController=Get.put(ConnectivityController());
   final TextStyle unselectedLabelStyle = TextStyle(
       color: Colors.white.withOpacity(0.5),
       fontWeight: FontWeight.w500,
@@ -50,7 +54,7 @@ class bottomNavigation extends StatelessWidget {
                     size: 20.0,
                   ),
                 ),
-                label: 'Favorites',
+                label: 'Favourites',
                 backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
               ),
               BottomNavigationBarItem(
@@ -73,18 +77,23 @@ class bottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final BottomNavigationController bottomNavigationController =
     Get.put(BottomNavigationController(), permanent: false);
+    getData();
     return SafeArea(
         child: Scaffold(
           bottomNavigationBar:
           buildBottomNavigationMenu(context, bottomNavigationController),
-          body: Obx(() => IndexedStack(
+          body: Obx(() => connectivityController.isConnected.value ?IndexedStack(
             index: bottomNavigationController.tabIndex.value,
             children: [
               home(),
               favoritesCars(),
               userAccount(),
             ],
-          )),
+          ):Center(child: Text('No Internet Connection',style: TextStyle(fontSize: 30,color: Colors.grey),))),
         ));
+  }
+  getData() async {
+    await firestoreController.getUser();
+    await firestoreController.getPosts();
   }
 }

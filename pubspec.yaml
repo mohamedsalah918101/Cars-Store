@@ -55,6 +55,7 @@ dev_dependencies:
   flutter_image_slideshow: ^0.1.6
   url_launcher: ^6.2.4
   flutter_launcher_icons: ^0.13.1
+  connectivity_plus: ^5.0.2
 
 flutter_icons:
   android: true

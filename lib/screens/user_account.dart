@@ -9,7 +9,6 @@ class userAccount extends StatelessWidget {
   var _auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    firestoreController.getUser();
     return Scaffold(
       appBar: AppBar(
         title: Text(

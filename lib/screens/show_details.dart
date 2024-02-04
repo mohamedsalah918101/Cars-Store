@@ -1,6 +1,5 @@
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/models/post_model.dart';
-import 'package:cars_store/screens/favorites_cars.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -48,7 +47,7 @@ class ShowDetails extends StatelessWidget {
                 });
                 List<Widget> widgets = [];
                 for (var image in images) {
-                  widgets.add(Image.network(image));
+                  widgets.add(FadeInImage(placeholder: AssetImage('assets/images/loading.gif'), image: NetworkImage(image)));
                 }
                 return ImageSlideshow(
                     width: double.infinity, children: widgets);
@@ -65,19 +64,25 @@ class ShowDetails extends StatelessWidget {
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ),
-                 Obx(()=>  firestoreController.user.value.isFavourited(post?.id)
-                      ? GestureDetector(
-                          child: Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                        ),onTap: () async {
-                    await firestoreController.addRemoveFavourites(post!.id);
-                    await firestoreController.getUser();
-                  },)
-                      : GestureDetector(child: Icon(Icons.favorite_border),onTap: () async {
-                       await firestoreController.addRemoveFavourites(post!.id);
-                        await firestoreController.getUser();
-                  },))
+                  Obx(() =>
+                      firestoreController.user.value.isFavourited(post?.id)
+                          ? GestureDetector(
+                              child: Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ),
+                              onTap: ()  {
+                                firestoreController
+                                    .addRemoveFavourites(post!.id);
+                              },
+                            )
+                          : GestureDetector(
+                              child: Icon(Icons.favorite_border),
+                              onTap: ()  {
+                                 firestoreController
+                                    .addRemoveFavourites(post!.id);
+                              },
+                            ))
                 ],
               ),
               Text(
@@ -233,7 +238,7 @@ class ShowDetails extends StatelessWidget {
                           child: TextButton(
                               onPressed: () async {
                                 await launchUrl(
-                                    Uri.parse('tel:${post!.ownerMobile}'));
+                                    Uri.parse('tel:+2${post!.ownerMobile}'));
                               },
                               child: Icon(Icons.phone, color: Colors.white),
                               style: ButtonStyle(
