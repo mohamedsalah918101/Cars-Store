@@ -1,3 +1,4 @@
+import 'package:cars_store/controller/connectivity_controller.dart';
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/models/user_model.dart';
 import 'package:cars_store/screens/bottom_navigation.dart';
@@ -14,8 +15,8 @@ class SignUp extends StatelessWidget {
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
   var _auth = FirebaseAuth.instance;
-  FirestoreController firestoreController = Get.put(FirestoreController());
-
+  final FirestoreController firestoreController = Get.put(FirestoreController());
+  final ConnectivityController connectivityController=Get.put(ConnectivityController());
   void _showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -147,11 +148,6 @@ class SignUp extends StatelessWidget {
                       try {
                         await _auth.createUserWithEmailAndPassword(
                             email: email.text, password: password.text);
-                      } catch (e) {
-                        print('erorrr: $e');
-                        _showToast('Failed to Sign Up ,Try Again');
-                      }
-                      if (_auth.currentUser != null) {
                         UserModel user = UserModel(id: _auth.currentUser?.uid,
                             firstName: fristName.text,
                             lastName: lastName.text,
@@ -159,6 +155,8 @@ class SignUp extends StatelessWidget {
                             email: email.text,favourites: <String>[]);
                         await firestoreController.addUser(user);
                         Get.offAll(() => bottomNavigation());
+                      } catch (e) {
+                        _showToast('Failed to Sign Up ,Try Again');
                       }
                     }
                   },
@@ -171,7 +169,9 @@ class SignUp extends StatelessWidget {
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                      )))
+                      ))),
+              SizedBox(height: 10),
+              Obx(() => connectivityController.isConnected.value ?Text(''):Text('No Internet Connection',style: TextStyle(color: Colors.red),))
             ],
           ),
         ),
