@@ -1,3 +1,4 @@
+import 'package:cars_store/controller/connectivity_controller.dart';
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/screens/bottom_navigation.dart';
 import 'package:cars_store/screens/sign_up.dart';
@@ -11,6 +12,7 @@ class login extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final FirestoreController firestoreController =
       Get.put(FirestoreController());
+  final ConnectivityController connectivityController=Get.put(ConnectivityController());
   var _auth = FirebaseAuth.instance;
 
   void _showToast(String message) {
@@ -134,7 +136,9 @@ class login extends StatelessWidget {
                           fontSize: 20),
                     ))
               ],
-            )
+            ),
+            SizedBox(height: 10),
+            Obx(() => connectivityController.isConnected.value ?Text(''):Center(child: Text('No Internet Connection',style: TextStyle(color: Colors.red),)))
           ],
         ),
       ),
