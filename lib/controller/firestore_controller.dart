@@ -72,7 +72,10 @@ class FirestoreController extends GetxController {
     final snapshot = await _firestore.collectionGroup('posts').get();
     posts.assignAll(snapshot.docs.map((doc) {
       return PostModel.fromMap(doc.id, doc.data());
-    }).toList());}catch(e){
+    }).toList());
+    // Sort posts by date
+    posts.sort((a, b) => b.time!.compareTo(a.time!));
+    }catch(e){
       _showToast('Something Wrong');
     }
   }
@@ -85,4 +88,6 @@ class FirestoreController extends GetxController {
           .doc()
           .set(post.toMap());
   }
+
+
 }
