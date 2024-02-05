@@ -62,7 +62,10 @@ class FirestoreController extends GetxController {
     print('Docssss:${snapshot.docs}');
     posts.assignAll(snapshot.docs.map((doc) {
       return PostModel.fromMap(doc.id, doc.data());
-    }).toList());}catch(e){}
+    }).toList());
+    // Sort posts by date
+    posts.sort((a, b) => b.time!.compareTo(a.time!));
+    }catch(e){}
     print('possssstssss${posts[0].images}');
   }
 
