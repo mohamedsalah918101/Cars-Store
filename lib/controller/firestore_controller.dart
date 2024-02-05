@@ -1,7 +1,9 @@
 import 'package:cars_store/models/post_model.dart';
 import 'package:cars_store/models/user_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreController extends GetxController {
@@ -11,6 +13,16 @@ class FirestoreController extends GetxController {
   var favouritePosts=<PostModel>[].obs;
   var _firestore = FirebaseFirestore.instance;
   var _auth = FirebaseAuth.instance;
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+      textColor: Colors.white,
+    );
+  }
   Future<void> getUser() async {
     try {
       final snapshot =
@@ -58,15 +70,15 @@ class FirestoreController extends GetxController {
 
   Future<void> getPosts() async {
     try{
-    final snapshot = await _firestore.collectionGroup('posts').get();
-    print('Docssss:${snapshot.docs}');
-    posts.assignAll(snapshot.docs.map((doc) {
-      return PostModel.fromMap(doc.id, doc.data());
-    }).toList());
-    // Sort posts by date
-    posts.sort((a, b) => b.time!.compareTo(a.time!));
-    }catch(e){}
-    print('possssstssss${posts[0].images}');
+      final snapshot = await _firestore.collectionGroup('posts').get();
+      posts.assignAll(snapshot.docs.map((doc) {
+        return PostModel.fromMap(doc.id, doc.data());
+      }).toList());
+      // Sort posts by date
+      posts.sort((a, b) => b.time!.compareTo(a.time!));
+    }catch(e){
+      _showToast('Something Wrong');
+    }
   }
 
   Future<void> addPost(PostModel post) async {
