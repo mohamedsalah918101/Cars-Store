@@ -212,7 +212,7 @@ class AddPost extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
         title: Text(
-          "Add Your Car",
+          "Sell Your Car",
           style: TextStyle(color: Colors.white),
         ),
       ),
