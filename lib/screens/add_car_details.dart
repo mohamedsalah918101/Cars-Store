@@ -1,9 +1,9 @@
+import 'package:cars_store/controller/connectivity_controller.dart';
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/controller/image_picker_controller.dart';
 import 'package:cars_store/models/post_model.dart';
 import 'package:cars_store/models/user_model.dart';
 import 'package:cars_store/screens/bottom_navigation.dart';
-import 'package:cars_store/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:datepicker_dropdown/datepicker_dropdown.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +16,8 @@ class AddPost extends StatelessWidget {
   final TextEditingController decription = TextEditingController();
   final FirestoreController firestoreController =
       Get.put(FirestoreController());
+  final ConnectivityController connectivityController= Get.put(ConnectivityController());
+  final controller = Get.put(ImagePickerController());
   List<String> _bodyTypeItems = [
     '4x4',
     'Cabriolet',
@@ -206,7 +208,6 @@ class AddPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ImagePickerController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
@@ -215,7 +216,7 @@ class AddPost extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
+      body:Obx(() => connectivityController.isConnected.value ?SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: Column(
@@ -549,7 +550,7 @@ class AddPost extends StatelessWidget {
                         colorText: Colors.white,
                         duration: Duration(minutes: 60)
                       );
-                      List<String> downloadURLs =
+                     try{ List<String> downloadURLs =
                           await controller.uploadImagesToFirebase();
                       print("Download URLs: $downloadURLs");
                       await firestoreController.getUser();
@@ -574,15 +575,10 @@ class AddPost extends StatelessWidget {
                       images: downloadURLs);
                       await firestoreController.addPost(post);
                       await snackbarController!.close();
-                      await Get.offAll(bottomNavigation());
-
-                      // for(var url in controller.networkImages)
-                      //   Image.network(
-                      //     url.toString(),
-                      //     width: 50,
-                      //     height: 50,
-                      //     fit: BoxFit.cover,
-                      //   );
+                      await Get.offAll(bottomNavigation());}catch(e){
+                       snackbarController!.close();
+                       _showToast('Failed to Add Post');
+                     }
                     }
                   },
                   child: Text('Add Post',
@@ -598,7 +594,7 @@ class AddPost extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ):Center(child: Text('No Internet Connection',style: TextStyle(fontSize: 30,color: Colors.grey),)),)
     );
   }
 }

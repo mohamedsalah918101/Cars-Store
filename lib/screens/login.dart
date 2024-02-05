@@ -11,7 +11,7 @@ class login extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FirestoreController firestoreController =
-  Get.put(FirestoreController());
+      Get.put(FirestoreController());
   final ConnectivityController connectivityController=Get.put(ConnectivityController());
   var _auth = FirebaseAuth.instance;
 
@@ -57,7 +57,7 @@ class login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                          BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
               SizedBox(
@@ -72,7 +72,7 @@ class login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)))),
+                            BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)))),
                 obscureText: true,
               ),
               SizedBox(

@@ -27,7 +27,6 @@ class ImagePickerController extends GetxController {
 
     for (File imageFile in images) {
       String fileName = DateTime.now().microsecondsSinceEpoch.toString();
-      try {
         Reference reference = FirebaseStorage.instance
             .ref()
             .child('uploadedPictures/${fileName}.png');
@@ -37,9 +36,6 @@ class ImagePickerController extends GetxController {
         String downloadURL = await reference.getDownloadURL();
         networkImages.add(downloadURL);
         downloadURLs.add(downloadURL);
-      } catch (e) {
-        print('Error uploading image: $e');
-      }
     }
 
     return downloadURLs;

@@ -1,7 +1,7 @@
+import 'package:cars_store/controller/connectivity_controller.dart';
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/models/post_model.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,20 +9,10 @@ import 'package:url_launcher/url_launcher.dart';
 class ShowDetails extends StatelessWidget {
   final FirestoreController firestoreController =
       Get.put(FirestoreController());
+  final ConnectivityController connectivityController=Get.put(ConnectivityController());
   PostModel? post;
 
   ShowDetails(this.post);
-
-  void _showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-      textColor: Colors.white,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +24,7 @@ class ShowDetails extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
+      body:Obx(() => connectivityController.isConnected.value  ?SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -268,7 +258,7 @@ class ShowDetails extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ):Center(child: Text('No Internet Connection',style: TextStyle(fontSize: 30,color: Colors.grey),))),
     );
   }
 }
