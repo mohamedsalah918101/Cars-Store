@@ -457,8 +457,8 @@ class AddPost extends StatelessWidget {
                   controller.pickImages();
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(36, 54, 101, 1.0),
-                    onPrimary: Colors.white,
+                    foregroundColor: Colors.white,
+                    backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     )),
