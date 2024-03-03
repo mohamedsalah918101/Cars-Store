@@ -54,15 +54,8 @@ dev_dependencies:
   path: ^1.8.3
   flutter_image_slideshow: ^0.1.6
   url_launcher: ^6.2.4
-  flutter_launcher_icons: ^0.13.1
   connectivity_plus: ^5.0.2
 
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/images/blue.jpg"
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/images/blue.jpg"
 
 
 # For information on the generic Dart part of this file, see the
