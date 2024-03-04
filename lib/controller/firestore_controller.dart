@@ -67,6 +67,7 @@ class FirestoreController extends GetxController {
   }
 
 
+
   Future<void> addUser(UserModel user) async {
       await _firestore
           .collection('users')
