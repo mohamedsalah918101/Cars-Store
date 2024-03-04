@@ -63,17 +63,27 @@ class login extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              TextField(
-                controller: passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                    labelText: "Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
+              GetBuilder<FirestoreController>(
+                builder: (_) {
+                  return TextField(
+                    controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    decoration: InputDecoration(
+                        labelText: "Password",
+                        suffixIcon: IconButton(
+                          onPressed: (){
+                            firestoreController.visibility();
+                          },
+                          icon: firestoreController.isVisibility ? Icon(Icons.visibility_off, color:  Colors.black ,) : Icon(Icons.visibility, color: Colors.black),
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
                             BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)))),
-                obscureText: true,
+                    obscureText: firestoreController.isVisibility ? false : true,
+                  );
+                }
               ),
               SizedBox(
                 height: 40,

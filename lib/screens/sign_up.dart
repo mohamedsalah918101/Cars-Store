@@ -99,32 +99,48 @@ class SignUp extends StatelessWidget {
                     )),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: password,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
-                    )),
+              GetBuilder<FirestoreController>(
+                builder:(_) => TextField(
+                  controller: password,
+                  obscureText: firestoreController.isVisibility ? false : true,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: "Password",
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          firestoreController.visibility();
+                        },
+                        icon: firestoreController.isVisibility ? Icon(Icons.visibility_off, color:  Colors.black ,) : Icon(Icons.visibility, color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                      )),
+                ),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: confirmPassword,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Confirm Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
-                    )),
+              GetBuilder<FirestoreController>(
+                builder:(_) => TextField(
+                  controller: confirmPassword,
+                  obscureText: firestoreController.isVisibility ? false : true,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: "Confirm Password",
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          firestoreController.visibility();
+                        },
+                        icon: firestoreController.isVisibility ? Icon(Icons.visibility_off, color:  Colors.black ,) : Icon(Icons.visibility, color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
+                      )),
+                ),
               ),
               SizedBox(height: 20),
               TextButton(

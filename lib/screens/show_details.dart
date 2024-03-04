@@ -28,12 +28,13 @@ class ShowDetails extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
-          IconButton(
-            onPressed: (){
-              Get.to(EditPost(post: post,));
-            },
-            icon: Icon(Icons.edit, color: Colors.white,),
-          )
+          if (post?.ownerName == firestoreController.user.value.firstName! + ' ' + firestoreController.user.value.lastName!)
+            IconButton(
+              onPressed: () {
+                Get.to(EditPost(post: post));
+              },
+              icon: Icon(Icons.edit, color: Colors.white,),
+            )
         ],
       ),
       body: Obx(() => connectivityController.isConnected.value

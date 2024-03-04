@@ -7,12 +7,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreController extends GetxController {
+  bool isVisibility = false;
   var user = UserModel().obs;
   var posts = <PostModel>[].obs;
   var post = PostModel().obs;
   var favouritePosts=<PostModel>[].obs;
   var _firestore = FirebaseFirestore.instance;
   var _auth = FirebaseAuth.instance;
+  void visibility(){
+    isVisibility = !isVisibility;
+
+    update();
+  }
   void _showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
@@ -112,6 +118,8 @@ class FirestoreController extends GetxController {
           .collection('posts')
           .doc(postId)
           .delete();
+
+      _showToast('Post deleted successfully');
     } catch (e) {
       _showToast('Failed to delete post');
     }
