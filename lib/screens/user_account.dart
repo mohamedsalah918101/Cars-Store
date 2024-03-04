@@ -79,8 +79,31 @@ class userAccount extends StatelessWidget {
             Center(
               child: ElevatedButton(
                   onPressed: () async {
-                    await _auth.signOut();
-                    await Get.offAll(() => login());
+                    Get.defaultDialog(
+                        title: "Sign Out",
+                        titleStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                        middleText: 'Do you want to Sign Out?',
+                        middleTextStyle: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                        backgroundColor: Colors.grey,
+                        radius: 10,
+                        textCancel: 'No',
+                        cancelTextColor: Colors.black,
+                        textConfirm: 'Yes',
+                        confirmTextColor: Colors.white,
+                        onCancel: () {
+                          Get.back();
+                        },
+                        onConfirm: () async {
+                          await _auth.signOut();
+                          await Get.offAll(() => login());
+                        },
+                        buttonColor: Colors.black);
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
