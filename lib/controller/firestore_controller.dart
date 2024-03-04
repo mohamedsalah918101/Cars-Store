@@ -89,5 +89,32 @@ class FirestoreController extends GetxController {
           .set(post.toMap());
   }
 
+  Future<void> editPost(String postId, PostModel updatedPost, List<String> downloadURLs) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(_auth.currentUser?.uid)
+          .collection('posts')
+          .doc(postId)
+          .update(updatedPost.toMap());
+      _showToast('Post updated successfully');
+    } catch (e) {
+      _showToast('Failed to update post');
+    }
+  }
+
+
+  Future<void> deletePost(String postId) async {
+    try {
+      await _firestore
+          .collection('users')
+          .doc(_auth.currentUser?.uid)
+          .collection('posts')
+          .doc(postId)
+          .delete();
+    } catch (e) {
+      _showToast('Failed to delete post');
+    }
+  }
 
 }

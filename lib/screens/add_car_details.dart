@@ -1,3 +1,4 @@
+
 import 'package:cars_store/controller/connectivity_controller.dart';
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/controller/image_picker_controller.dart';
@@ -14,10 +15,12 @@ class AddPost extends StatelessWidget {
   final TextEditingController color = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController decription = TextEditingController();
+
   final FirestoreController firestoreController =
       Get.put(FirestoreController());
   final ConnectivityController connectivityController= Get.put(ConnectivityController());
   final controller = Get.put(ImagePickerController());
+
   List<String> _bodyTypeItems = [
     '4x4',
     'Cabriolet',
@@ -206,8 +209,13 @@ class AddPost extends StatelessWidget {
     );
   }
 
+  final PostModel? post;
+
+  AddPost({Key? key, this.post}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
@@ -540,7 +548,7 @@ class AddPost extends StatelessWidget {
                     } else if (decription.text.length < 20) {
                       _showToast('Please, Enter a Description over 20 letter');
                     } else if(controller.images.isEmpty){
-                      _showToast('Plesae, Pick Car Images');
+                      _showToast('Please, Pick Car Images');
                     }else {
                       snackbarController=Get.snackbar(
                         'Loading.......',
@@ -598,3 +606,4 @@ class AddPost extends StatelessWidget {
     );
   }
 }
+
