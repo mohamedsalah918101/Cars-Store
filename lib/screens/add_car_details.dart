@@ -209,9 +209,6 @@ class AddPost extends StatelessWidget {
     );
   }
 
-  final PostModel? post;
-
-  AddPost({Key? key, this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

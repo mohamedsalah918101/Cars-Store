@@ -16,7 +16,7 @@ class ShowDetails extends StatelessWidget {
 
   PostModel? post;
 
-  ShowDetails(this.post);
+  ShowDetails(this.post, {super.key});
 
   @override
   Widget build(BuildContext context) {

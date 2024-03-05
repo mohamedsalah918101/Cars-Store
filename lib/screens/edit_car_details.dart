@@ -214,23 +214,7 @@ class EditPost extends StatelessWidget {
 
   final PostModel? post;
 
-  EditPost({Key? key, this.post}) : super(key: key) {
-    if (post != null) {
-      brand = post!.brand ?? '';
-      model.text = post!.model ?? '';
-      year = post!.year ?? '';
-      bodyType = post!.bodyType ?? '';
-      cylinders = post!.cylinders ?? '';
-      engineCapcity = post!.engineCapacity ?? '';
-      fuelType = post!.fuelType ?? '';
-      color.text = post!.color ?? '';
-      transmissionType = post!.transmissionType ?? '';
-      kilometers = post!.kilometers ?? '';
-      price.text = post!.price ?? '';
-      location = post!.location ?? '';
-      description.text = post!.description ?? '';
-    }
-  }
+  EditPost({Key? key, this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -649,8 +633,7 @@ class EditPost extends StatelessWidget {
                                       ownerMobile: currentUser.phoneNumber,
                                       images: downloadURLs);
 
-                                  await firestoreController.editPost(
-                                      post.id!, post, downloadURLs);
+                                  await firestoreController.editPost(post);
 
                                   await snackbarController!.close();
                                   await Get.offAll(bottomNavigation());
