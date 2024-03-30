@@ -129,4 +129,27 @@ class FirestoreController extends GetxController {
     }
   }
 
+  void searchCarsByName(String query) async {
+    try {
+      final QuerySnapshot querySnapshot = await _firestore
+          .collection('posts')
+          .where('brand', isGreaterThanOrEqualTo: query)
+          .where('brand', isLessThan: query + 'z')
+          .get();
+
+      print("Number of documents found: ${querySnapshot.size}");
+
+      List<PostModel> filteredPosts = querySnapshot.docs
+          .map((doc) => PostModel.fromMap(doc.id, doc.data() as Map<String, dynamic>))
+          .toList();
+
+      print("Number of filtered posts: ${filteredPosts.length}");
+
+      // Update the posts list with the filtered posts
+      posts.assignAll(filteredPosts);
+    } catch (e) {
+      print("Error searching cars by brand: $e");
+    }
+  }
+
 }

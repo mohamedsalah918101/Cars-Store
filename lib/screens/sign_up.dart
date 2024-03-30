@@ -32,15 +32,14 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            "Sign Up",
-            style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: Color.fromRGBO(36, 54, 101, 1.0)),
-          ),
+        title: Text(
+          "Sign Up",
+          style: TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.bold,
+              color: Color.fromRGBO(36, 54, 101, 1.0)),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
