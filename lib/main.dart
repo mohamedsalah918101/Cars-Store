@@ -7,7 +7,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     name: "carstore",
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
           apiKey: "AIzaSyD8qOtONA0QI1KzsZrG0NaqdgpRck4dEOU",
           authDomain: "carstore-16676.firebaseapp.com",
           projectId: "carstore-16676",

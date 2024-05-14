@@ -18,10 +18,10 @@ class UserModel {
     return UserModel(
         id: userId,
         firstName: snapshot!['first name'],
-        lastName: snapshot!['last name'],
-        phoneNumber: snapshot!['phone number'],
-        email: snapshot!['email'],
-      favourites: snapshot['favourites']==null ?<String>[]: List<String>.from(snapshot!['favourites'])
+        lastName: snapshot['last name'],
+        phoneNumber: snapshot['phone number'],
+        email: snapshot['email'],
+        favourites: snapshot['favourites']==null ?<String>[]: List<String>.from(snapshot['favourites'])
     );
   }
 

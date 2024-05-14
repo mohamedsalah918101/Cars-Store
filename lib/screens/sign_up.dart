@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatelessWidget {
-  final TextEditingController fristName = TextEditingController();
+  final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
@@ -23,7 +23,7 @@ class SignUp extends StatelessWidget {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+      backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
       textColor: Colors.white,
     );
   }
@@ -32,7 +32,7 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Sign Up",
           style: TextStyle(
               fontSize: 35,
@@ -47,18 +47,18 @@ class SignUp extends StatelessWidget {
           child: Column(
             children: [
               TextField(
-                controller: fristName,
+                controller: firstName,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
                     labelText: "First Name",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                       BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: lastName,
                 keyboardType: TextInputType.name,
@@ -66,12 +66,12 @@ class SignUp extends StatelessWidget {
                     labelText: "Last Name",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                       BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: email,
                 keyboardType: TextInputType.emailAddress,
@@ -79,12 +79,12 @@ class SignUp extends StatelessWidget {
                     labelText: "E-mail",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                       BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: phoneNumber,
                 keyboardType: TextInputType.phone,
@@ -92,12 +92,12 @@ class SignUp extends StatelessWidget {
                     labelText: "Phone Number",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                       BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GetBuilder<FirestoreController>(
                 builder:(_) => TextField(
                   controller: password,
@@ -109,17 +109,17 @@ class SignUp extends StatelessWidget {
                         onPressed: (){
                           firestoreController.visibility();
                         },
-                        icon: firestoreController.isVisibility ? Icon(Icons.visibility_off, color:  Colors.black ,) : Icon(Icons.visibility, color: Colors.black),
+                        icon: firestoreController.isVisibility ? const Icon(Icons.visibility_off, color:  Colors.black ,) : const Icon(Icons.visibility, color: Colors.black),
                       ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide:
                         BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GetBuilder<FirestoreController>(
                 builder:(_) => TextField(
                   controller: confirmPassword,
@@ -131,20 +131,20 @@ class SignUp extends StatelessWidget {
                         onPressed: (){
                           firestoreController.visibility();
                         },
-                        icon: firestoreController.isVisibility ? Icon(Icons.visibility_off, color:  Colors.black ,) : Icon(Icons.visibility, color: Colors.black),
+                        icon: firestoreController.isVisibility ? const Icon(Icons.visibility_off, color:  Colors.black ,) : const Icon(Icons.visibility, color: Colors.black),
                       ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderSide:
                         BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                       )),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextButton(
                   onPressed: () async {
-                    if (fristName.text.isEmpty) {
+                    if (firstName.text.isEmpty) {
                       _showToast('Please,Enter your First Name');
                     } else if (lastName.text.isEmpty) {
                       _showToast('Please,Enter your Last Name');
@@ -164,7 +164,7 @@ class SignUp extends StatelessWidget {
                         await _auth.createUserWithEmailAndPassword(
                             email: email.text, password: password.text);
                         UserModel user = UserModel(id: _auth.currentUser?.uid,
-                            firstName: fristName.text,
+                            firstName: firstName.text,
                             lastName: lastName.text,
                             phoneNumber: phoneNumber.text,
                             email: email.text,favourites: <String>[]);
@@ -176,17 +176,17 @@ class SignUp extends StatelessWidget {
                     }
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(36, 54, 101, 1.0)),
+                    backgroundColor: WidgetStateProperty.all(
+                        const Color.fromRGBO(36, 54, 101, 1.0)),
                   ),
-                  child: Text('Sign up',
+                  child: const Text('Sign up',
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ))),
-              SizedBox(height: 10),
-              Obx(() => connectivityController.isConnected.value ?Text(''):Text('No Internet Connection',style: TextStyle(color: Colors.red),))
+              const SizedBox(height: 10),
+              Obx(() => connectivityController.isConnected.value ?const Text(''):const Text('No Internet Connection',style: TextStyle(color: Colors.red),))
             ],
           ),
         ),

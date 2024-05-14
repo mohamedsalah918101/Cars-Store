@@ -16,7 +16,7 @@ class home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Home",
           style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -33,7 +33,7 @@ class home extends StatelessWidget {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search for cars by brand',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -45,22 +45,22 @@ class home extends StatelessWidget {
             ),
           ),
           Obx(() => firestoreController.posts.isEmpty
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : Expanded(
                 child: RefreshIndicator(
                     onRefresh: () {
                       return firestoreController.getPosts();
                     },
                     child: SingleChildScrollView(
-                      physics: AlwaysScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             child: Text(
                               'Posts',
                               style: TextStyle(
@@ -69,7 +69,7 @@ class home extends StatelessWidget {
                           ),
                           Obx(() => ListView.builder(
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: firestoreController.posts.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
@@ -79,7 +79,7 @@ class home extends StatelessWidget {
                                   },
                                   child: Card(
                                     color: Colors.white,
-                                    margin: EdgeInsets.symmetric(
+                                    margin: const EdgeInsets.symmetric(
                                         vertical: 8, horizontal: 10),
                                     child: Column(
                                       children: [
@@ -93,17 +93,17 @@ class home extends StatelessWidget {
                                                 firestoreController
                                                     .posts[index].images![0],
                                               ),
-                                              placeholder: AssetImage(
+                                              placeholder: const AssetImage(
                                                   'assets/images/loading.gif')),
                                         ),
                                         ListTile(
                                           contentPadding:
-                                              EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                              const EdgeInsets.fromLTRB(16, 0, 16, 0),
                                           title: Align(
                                               alignment: Alignment.topLeft,
                                               child: Text(
                                                 '${firestoreController.posts[index].brand} ${firestoreController.posts[index].model} ${firestoreController.posts[index].year}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 25,
                                                     fontWeight: FontWeight.bold),
                                               )),
@@ -115,7 +115,7 @@ class home extends StatelessWidget {
                                                   alignment: Alignment.topLeft,
                                                   child: Text(
                                                       "EGP ${firestoreController.posts[index].price}",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.w500))),
@@ -125,7 +125,7 @@ class home extends StatelessWidget {
                                                       firestoreController
                                                           .posts[index].location
                                                           .toString(),
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.w500))),
@@ -136,7 +136,7 @@ class home extends StatelessWidget {
                                                           firestoreController
                                                               .posts[index].time
                                                               .toString()),
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           fontSize: 13,
                                                           fontWeight: FontWeight.w500,
                                                           color: Colors.grey)))
@@ -159,13 +159,13 @@ class home extends StatelessWidget {
         onPressed: () {
           Get.to(() => AddPost());
         },
-        child: Icon(Icons.add),
         backgroundColor: Colors.blue[900],
         foregroundColor: Colors.white,
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
+        child: const Icon(Icons.add),
       ),
     );
   }

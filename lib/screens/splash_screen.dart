@@ -12,7 +12,7 @@ class splashScreen extends StatelessWidget{
       body: AnimatedSplashScreen(
           splashIconSize: 200,
           splashTransition: SplashTransition.scaleTransition,
-          splash: CircleAvatar(
+          splash: const CircleAvatar(
             radius: 100,
             backgroundImage: AssetImage("assets/images/blue.jpg"),
             backgroundColor: Colors.white,

@@ -23,7 +23,7 @@ class EditPost extends StatelessWidget {
       Get.put(ConnectivityController());
   final controller = Get.put(ImagePickerController());
 
-  List<String> _bodyTypeItems = [
+  final List<String> _bodyTypeItems = [
     '4x4',
     'Cabriolet',
     'Coupe',
@@ -34,7 +34,7 @@ class EditPost extends StatelessWidget {
     'Sedan',
     'Van/Bus'
   ];
-  List<String> _brandItems = [
+  final List<String> _brandItems = [
     'Alfa Romeo',
     'Aston Martin',
     'Audi',
@@ -118,7 +118,7 @@ class EditPost extends StatelessWidget {
     'Volvo',
     'Zotye'
   ];
-  List<String> _locationItems = [
+  final List<String> _locationItems = [
     'Alexandria, Egypt',
     'Aswan, Egypt',
     'Asyut, Egypt',
@@ -147,7 +147,7 @@ class EditPost extends StatelessWidget {
     'South Sinai, Egypt',
     'Suez, Egypt'
   ];
-  List<String> _engineCapcityItems = [
+  final List<String> _engineCapcityItems = [
     '0-800',
     '1000-1300',
     '1400-1500',
@@ -156,15 +156,15 @@ class EditPost extends StatelessWidget {
     '2200-2800',
     'More Than 3000'
   ];
-  List<String> _fuelTypeItems = [
+  final List<String> _fuelTypeItems = [
     'Gasoline',
     'Diesel',
     'Electric',
     'Natural Gas',
     'Hybird'
   ];
-  List<String> _transmissionTypeItems = ['Manual', 'Automatic'];
-  List<String> _kilometersItems = [
+  final List<String> _transmissionTypeItems = ['Manual', 'Automatic'];
+  final List<String> _kilometersItems = [
     '0 to 9999',
     '10000 to 19999',
     '20000 to 29999',
@@ -182,7 +182,7 @@ class EditPost extends StatelessWidget {
     '180000 to 199999',
     'More than 200000'
   ];
-  List<String> _cylindersItems = [
+  final List<String> _cylindersItems = [
     '3 Cylinders',
     '4 Cylinders',
     '6 Cylinders',
@@ -207,7 +207,7 @@ class EditPost extends StatelessWidget {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+      backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
       textColor: Colors.white,
     );
   }
@@ -220,8 +220,8 @@ class EditPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-          title: Text(
+          backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+          title: const Text(
             "Edit or Delete Post",
             style: TextStyle(color: Colors.white),
           ),
@@ -230,12 +230,12 @@ class EditPost extends StatelessWidget {
               onPressed: () {
                 Get.defaultDialog(
                     title: "Delete Post",
-                    titleStyle: TextStyle(
+                    titleStyle: const TextStyle(
                         fontSize: 18,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
                     middleText: 'Do you want to Delete this post?',
-                    middleTextStyle: TextStyle(
+                    middleTextStyle: const TextStyle(
                         fontSize: 18,
                         color: Colors.black,
                         fontWeight: FontWeight.bold),
@@ -258,7 +258,7 @@ class EditPost extends StatelessWidget {
                 // Perform delete operation
 
               },
-              icon: Icon(Icons.delete, color: Colors.white,),
+              icon: const Icon(Icons.delete, color: Colors.white,),
             )
           ],
           centerTitle: true,
@@ -276,7 +276,7 @@ class EditPost extends StatelessWidget {
                                 labelText: "Brand",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -290,7 +290,7 @@ class EditPost extends StatelessWidget {
                               }
                               print(brand);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextField(
                           controller: model,
                           keyboardType: TextInputType.text,
@@ -298,18 +298,18 @@ class EditPost extends StatelessWidget {
                               labelText: "Model",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromRGBO(36, 54, 101, 1.0)),
                               )),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Body Type",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -323,7 +323,7 @@ class EditPost extends StatelessWidget {
                               }
                               print(bodyType);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownDatePicker(
                           showDay: false,
                           showMonth: false,
@@ -334,18 +334,18 @@ class EditPost extends StatelessWidget {
                               labelText: "Year",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromRGBO(36, 54, 101, 1.0)),
                               )),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Number of Cylinders",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -359,13 +359,13 @@ class EditPost extends StatelessWidget {
                               }
                               print(cylinders);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Engine Capacity (CC)",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -379,13 +379,13 @@ class EditPost extends StatelessWidget {
                               }
                               print(engineCapcity);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Fuel Type",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -399,13 +399,13 @@ class EditPost extends StatelessWidget {
                               }
                               print(fuelType);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Transmission Type",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -419,7 +419,7 @@ class EditPost extends StatelessWidget {
                               }
                               print(transmissionType);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextField(
                           controller: color,
                           keyboardType: TextInputType.text,
@@ -427,18 +427,18 @@ class EditPost extends StatelessWidget {
                               labelText: "Color",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromRGBO(36, 54, 101, 1.0)),
                               )),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Kilometers",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -452,7 +452,7 @@ class EditPost extends StatelessWidget {
                               }
                               print(kilometers);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextField(
                           controller: price,
                           keyboardType: TextInputType.number,
@@ -460,18 +460,18 @@ class EditPost extends StatelessWidget {
                               labelText: "Price",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromRGBO(36, 54, 101, 1.0)),
                               )),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         DropdownButtonFormField(
                             decoration: InputDecoration(
                                 labelText: "Location",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Color.fromRGBO(36, 54, 101, 1.0)),
                                 )),
@@ -485,7 +485,7 @@ class EditPost extends StatelessWidget {
                               }
                               print(location);
                             }),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextField(
                           maxLines: 3,
                           controller: description,
@@ -494,12 +494,12 @@ class EditPost extends StatelessWidget {
                               labelText: "Description",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromRGBO(36, 54, 101, 1.0)),
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         ElevatedButton(
@@ -508,11 +508,11 @@ class EditPost extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+                              backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               )),
-                          child: Row(
+                          child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Icon(
@@ -529,7 +529,7 @@ class EditPost extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Obx(() => Container(
                               height: 100,
                               child: ListView.builder(
@@ -541,7 +541,7 @@ class EditPost extends StatelessWidget {
                                         child: Container(
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Color.fromRGBO(
+                                              color: const Color.fromRGBO(
                                                   36, 54, 101, 1.0),
                                               width: 2,
                                             ),
@@ -561,7 +561,7 @@ class EditPost extends StatelessWidget {
                                         ));
                                   }),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         ElevatedButton(
@@ -604,7 +604,7 @@ class EditPost extends StatelessWidget {
                                     snackPosition: SnackPosition.BOTTOM,
                                     backgroundColor: Colors.blue[900],
                                     colorText: Colors.white,
-                                    duration: Duration(minutes: 60));
+                                    duration: const Duration(minutes: 60));
                                 try {
                                   List<String> downloadURLs =
                                       await controller.uploadImagesToFirebase();
@@ -627,9 +627,7 @@ class EditPost extends StatelessWidget {
                                       location: location,
                                       description: description.text,
                                       time: DateTime.now(),
-                                      ownerName: currentUser.firstName! +
-                                          ' ' +
-                                          currentUser.lastName!,
+                                      ownerName: '${currentUser.firstName!} ${currentUser.lastName!}',
                                       ownerMobile: currentUser.phoneNumber,
                                       images: downloadURLs);
 
@@ -643,20 +641,20 @@ class EditPost extends StatelessWidget {
                                 }
                               }
                             },
-                            child: Text('Save Changes',
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromRGBO(36, 54, 101, 1.0)),
+                            child: const Text('Save Changes',
                                 style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
-                                )),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromRGBO(36, 54, 101, 1.0))),
+                                ))),
                       ],
                     ),
                   ),
                 )
-              : Center(
+              : const Center(
                   child: Text(
                   'No Internet Connection',
                   style: TextStyle(fontSize: 30, color: Colors.grey),

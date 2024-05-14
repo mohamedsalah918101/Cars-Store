@@ -11,7 +11,7 @@ class ImagePickerController extends GetxController {
   Future pickImages() async {
     try {
       final imagePicks = await ImagePicker().pickMultiImage();
-      if (imagePicks == null || imagePicks.isEmpty) {
+      if (imagePicks.isEmpty) {
         return;
       }
       images.value = imagePicks.map((imagePick) => File(imagePick.path)).toList();
@@ -29,7 +29,7 @@ class ImagePickerController extends GetxController {
       String fileName = DateTime.now().microsecondsSinceEpoch.toString();
         Reference reference = FirebaseStorage.instance
             .ref()
-            .child('uploadedPictures/${fileName}.png');
+            .child('uploadedPictures/$fileName.png');
 
         await reference.putFile(imageFile);
 

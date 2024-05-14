@@ -11,7 +11,7 @@ class userAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Account",
           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Color.fromRGBO(36, 54, 101, 1.0)),
         ),
@@ -22,71 +22,70 @@ class userAccount extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: CircleAvatar(
                 radius: 80,
                 backgroundColor: Colors.white,
                 backgroundImage: AssetImage("assets/images/avatar.png"),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Obx((){
               return Center(
                 child: Text(
                   "${firestoreController.user.value.firstName}",
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
+                  style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
                 ),
               );
             }),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),Obx((){
               return Center(
                 child: Text(
                   "${firestoreController.user.value.lastName}",
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
+                  style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Color.fromRGBO(36, 54, 101, 1.0)),
                 ),
               );
-            })
-            ,
-            SizedBox(
+            }),
+            const SizedBox(
               height: 20,
             ),
             Obx((){
               return Card(
-                color: Color.fromRGBO(36, 54, 101, 1.0),
+                color: const Color.fromRGBO(36, 54, 101, 1.0),
                 child: ListTile(
-                    leading: Icon(Icons.mail, color: Colors.white,),
-                  title: Text("${firestoreController.user.value.email}", style: TextStyle(fontSize: 20, color: Colors.white),),
+                    leading: const Icon(Icons.mail, color: Colors.white,),
+                  title: Text("${firestoreController.user.value.email}", style: const TextStyle(fontSize: 20, color: Colors.white),),
                 ),
               );
             }),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Obx((){
               return Card(
-                color: Color.fromRGBO(36, 54, 101, 1.0),
+                color: const Color.fromRGBO(36, 54, 101, 1.0),
                 child: ListTile(
-                  leading: Icon(Icons.phone, color: Colors.white,),
-                  title: Text("${firestoreController.user.value.phoneNumber}",style: TextStyle(fontSize: 20, color: Colors.white),),
+                  leading: const Icon(Icons.phone, color: Colors.white,),
+                  title: Text("${firestoreController.user.value.phoneNumber}",style: const TextStyle(fontSize: 20, color: Colors.white),),
                 ),
               );
             }),
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
             Center(
               child: ElevatedButton(
                   onPressed: () async {
                     Get.defaultDialog(
                         title: "Sign Out",
-                        titleStyle: TextStyle(
+                        titleStyle: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                             fontWeight: FontWeight.bold),
                         middleText: 'Do you want to Sign Out?',
-                        middleTextStyle: TextStyle(
+                        middleTextStyle: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                             fontWeight: FontWeight.bold),
@@ -106,10 +105,10 @@ class userAccount extends StatelessWidget {
                         buttonColor: Colors.black);
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(36, 54, 101, 1.0)),
+                    backgroundColor: WidgetStateProperty.all(
+                        const Color.fromRGBO(36, 54, 101, 1.0)),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Sign Out",
                     style: TextStyle(
                       fontSize: 25,

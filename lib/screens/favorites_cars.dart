@@ -12,7 +12,7 @@ class favoritesCars extends StatelessWidget {
     firestoreController.getFavouritePosts();
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Favourites",
             style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -25,21 +25,21 @@ class favoritesCars extends StatelessWidget {
             return firestoreController.getFavouritePosts();
           },
           child: Obx(() => firestoreController.favouritePosts.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                   'No Favourites Posts',
                   style: TextStyle(fontSize: 30, color: Colors.grey),
                 ))
               : SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
                           'Favourite Posts',
                           style: TextStyle(
@@ -48,7 +48,7 @@ class favoritesCars extends StatelessWidget {
                       ),
                       Obx(() => ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: firestoreController.favouritePosts.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
@@ -58,7 +58,7 @@ class favoritesCars extends StatelessWidget {
                               },
                               child: Card(
                                 color: Colors.white,
-                                margin: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.symmetric(
                                     vertical: 8, horizontal: 10),
                                 child: Column(
                                   children: [
@@ -73,17 +73,17 @@ class favoritesCars extends StatelessWidget {
                                                 .favouritePosts[index]
                                                 .images![0],
                                           ),
-                                          placeholder: AssetImage(
+                                          placeholder: const AssetImage(
                                               'assets/images/loading.gif')),
                                     ),
                                     ListTile(
                                       contentPadding:
-                                          EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                          const EdgeInsets.fromLTRB(16, 0, 16, 0),
                                       title: Align(
                                           alignment: Alignment.topLeft,
                                           child: Text(
                                             '${firestoreController.favouritePosts[index].brand} ${firestoreController.favouritePosts[index].model} ${firestoreController.favouritePosts[index].year}',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.bold),
                                           )),
@@ -95,7 +95,7 @@ class favoritesCars extends StatelessWidget {
                                               alignment: Alignment.topLeft,
                                               child: Text(
                                                   "EGP ${firestoreController.favouritePosts[index].price}",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w500))),
@@ -106,7 +106,7 @@ class favoritesCars extends StatelessWidget {
                                                       .favouritePosts[index]
                                                       .location
                                                       .toString(),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.w500))),
@@ -118,7 +118,7 @@ class favoritesCars extends StatelessWidget {
                                                           .favouritePosts[index]
                                                           .time
                                                           .toString()),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 13,
                                                       fontWeight:
                                                           FontWeight.w500,

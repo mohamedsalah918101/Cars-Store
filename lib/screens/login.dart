@@ -21,7 +21,7 @@ class login extends StatelessWidget {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+      backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
       textColor: Colors.white,
     );
   }
@@ -30,7 +30,7 @@ class login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             "Login",
             style: TextStyle(
@@ -55,12 +55,12 @@ class login extends StatelessWidget {
                     labelText: "E-mail",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)),
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               GetBuilder<FirestoreController>(
@@ -74,18 +74,18 @@ class login extends StatelessWidget {
                           onPressed: (){
                             firestoreController.visibility();
                           },
-                          icon: firestoreController.isVisibility ? Icon(Icons.visibility_off, color:  Colors.black ,) : Icon(Icons.visibility, color: Colors.black),
+                          icon: firestoreController.isVisibility ? const Icon(Icons.visibility_off, color:  Colors.black ,) : const Icon(Icons.visibility, color: Colors.black),
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
+                        focusedBorder: const OutlineInputBorder(
                             borderSide:
                             BorderSide(color: Color.fromRGBO(36, 54, 101, 1.0)))),
                     obscureText: firestoreController.isVisibility ? false : true,
                   );
                 }
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Center(
@@ -110,10 +110,10 @@ class login extends StatelessWidget {
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(36, 54, 101, 1.0)),
+                      backgroundColor: WidgetStateProperty.all(
+                          const Color.fromRGBO(36, 54, 101, 1.0)),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Login",
                       style: TextStyle(
                         fontSize: 25,
@@ -122,14 +122,14 @@ class login extends StatelessWidget {
                       ),
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Do not have an account?",
                     style: TextStyle(fontSize: 20),
                   ),
@@ -137,7 +137,7 @@ class login extends StatelessWidget {
                       onPressed: () {
                         Get.to(() => SignUp());
                       },
-                      child: Text(
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(
                             decoration: TextDecoration.underline,
@@ -148,8 +148,8 @@ class login extends StatelessWidget {
                       ))
                 ],
               ),
-              SizedBox(height: 10),
-              Obx(() => connectivityController.isConnected.value ?Text(''):Center(child: Text('No Internet Connection',style: TextStyle(color: Colors.red),)))
+              const SizedBox(height: 10),
+              Obx(() => connectivityController.isConnected.value ?const Text(''):const Center(child: Text('No Internet Connection',style: TextStyle(color: Colors.red),)))
             ],
           ),
         ),

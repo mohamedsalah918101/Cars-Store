@@ -17,11 +17,11 @@ class bottomNavigation extends StatelessWidget {
       fontSize: 12);
 
   final TextStyle selectedLabelStyle =
-  TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
+  const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
 
   buildBottomNavigationMenu(context, bottomNavigationController) {
     return Obx(() => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
         child: SizedBox(
           height: 70,
           child: BottomNavigationBar(
@@ -29,7 +29,7 @@ class bottomNavigation extends StatelessWidget {
             showSelectedLabels: true,
             onTap: bottomNavigationController.changeTabIndex,
             currentIndex: bottomNavigationController.tabIndex.value,
-            backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+            backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
             unselectedItemColor: Colors.white.withOpacity(0.5),
             selectedItemColor: Colors.white,
             unselectedLabelStyle: unselectedLabelStyle,
@@ -37,36 +37,36 @@ class bottomNavigation extends StatelessWidget {
             items: [
               BottomNavigationBarItem(
                 icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
+                  margin: const EdgeInsets.only(bottom: 7),
+                  child: const Icon(
                     Icons.home,
                     size: 20.0,
                   ),
                 ),
                 label: 'Home',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
               ),
               BottomNavigationBarItem(
                 icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
+                  margin: const EdgeInsets.only(bottom: 7),
+                  child: const Icon(
                     Icons.favorite,
                     size: 20.0,
                   ),
                 ),
                 label: 'Favourites',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
               ),
               BottomNavigationBarItem(
                 icon: Container(
-                  margin: EdgeInsets.only(bottom: 7),
-                  child: Icon(
+                  margin: const EdgeInsets.only(bottom: 7),
+                  child: const Icon(
                     Icons.account_circle,
                     size: 20.0,
                   ),
                 ),
                 label: 'Account',
-                backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
+                backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
               ),
             ],
           ),
@@ -89,7 +89,7 @@ class bottomNavigation extends StatelessWidget {
               favoritesCars(),
               userAccount(),
             ],
-          ):Center(child: Text('No Internet Connection',style: TextStyle(fontSize: 30,color: Colors.grey),))),
+          ):const Center(child: Text('No Internet Connection',style: TextStyle(fontSize: 30,color: Colors.grey),))),
         ));
   }
   getData() async {

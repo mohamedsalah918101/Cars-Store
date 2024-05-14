@@ -1,7 +1,6 @@
 import 'package:cars_store/controller/connectivity_controller.dart';
 import 'package:cars_store/controller/firestore_controller.dart';
 import 'package:cars_store/models/post_model.dart';
-import 'package:cars_store/screens/add_car_details.dart';
 import 'package:cars_store/screens/edit_car_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -22,18 +21,18 @@ class ShowDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(36, 54, 101, 1.0),
-        title: Text(
+        backgroundColor: const Color.fromRGBO(36, 54, 101, 1.0),
+        title: const Text(
           "Details",
           style: TextStyle(color: Colors.white),
         ),
         actions: [
-          if (post?.ownerName == firestoreController.user.value.firstName! + ' ' + firestoreController.user.value.lastName!)
+          if (post?.ownerName == '${firestoreController.user.value.firstName!} ${firestoreController.user.value.lastName!}')
             IconButton(
               onPressed: () {
                 Get.to(EditPost(post: post));
               },
-              icon: Icon(Icons.edit, color: Colors.white,),
+              icon: const Icon(Icons.edit, color: Colors.white,),
             )
         ],
       ),
@@ -53,13 +52,13 @@ class ShowDetails extends StatelessWidget {
                       for (var image in images) {
                         widgets.add(FadeInImage(
                             placeholder:
-                                AssetImage('assets/images/loading.gif'),
+                                const AssetImage('assets/images/loading.gif'),
                             image: NetworkImage(image)));
                       }
                       return ImageSlideshow(
                           width: double.infinity, children: widgets);
                     }),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -67,14 +66,14 @@ class ShowDetails extends StatelessWidget {
                         Expanded(
                           child: Text(
                             "EGP ${post!.price}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Obx(() => firestoreController.user.value
                                 .isFavourited(post?.id)
                             ? GestureDetector(
-                                child: Icon(
+                                child: const Icon(
                                   Icons.favorite,
                                   color: Colors.red,
                                 ),
@@ -84,7 +83,7 @@ class ShowDetails extends StatelessWidget {
                                 },
                               )
                             : GestureDetector(
-                                child: Icon(Icons.favorite_border),
+                                child: const Icon(Icons.favorite_border),
                                 onTap: () {
                                   firestoreController
                                       .addRemoveFavourites(post!.id);
@@ -94,47 +93,43 @@ class ShowDetails extends StatelessWidget {
                     ),
                     Text(
                       "${post!.brand} ${post!.model}",
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.location_pin,
                           color: Colors.grey,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
                         Expanded(
                             flex: 3,
                             child: Text(
                               post!.location.toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                             )),
                         Expanded(
                             child: Text(
-                                post!.time!.day.toString() +
-                                    '/' +
-                                    post!.time!.month.toString() +
-                                    '/' +
-                                    post!.time!.year.toString(),
-                                style: TextStyle(
+                                '${post!.time!.day}/${post!.time!.month}/${post!.time!.year}',
+                                style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w500))),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Divider(
+                    const Divider(
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -143,104 +138,104 @@ class ShowDetails extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Detialis',
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Brand :')),
+                              const SizedBox(width: 150, child: Text('Brand :')),
                               Text(post!.brand.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Model :')),
+                              const SizedBox(width: 150, child: Text('Model :')),
                               Text(post!.model.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Year :')),
+                              const SizedBox(width: 150, child: Text('Year :')),
                               Text(post!.year.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Body Type :')),
+                              const SizedBox(width: 150, child: Text('Body Type :')),
                               Text(post!.bodyType.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Cylinders :')),
+                              const SizedBox(width: 150, child: Text('Cylinders :')),
                               Text(post!.cylinders.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                   width: 150,
                                   child: Text('Engine Capacity(CC) :')),
                               Text(post!.engineCapacity.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Fuel Type :')),
+                              const SizedBox(width: 150, child: Text('Fuel Type :')),
                               Text(post!.fuelType.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                   width: 150,
                                   child: Text('Transmission Type :')),
                               Text(post!.transmissionType.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Color :')),
+                              const SizedBox(width: 150, child: Text('Color :')),
                               Text(post!.color.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Kilometers :')),
+                              const SizedBox(width: 150, child: Text('Kilometers :')),
                               Text(post!.kilometers.toString()),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                   width: 150, child: Text('Description :')),
                               Expanded(
                                   child: Text(post!.description.toString())),
                             ],
                           ),
-                          SizedBox(height: 20),
-                          Divider(color: Colors.black),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
+                          const Divider(color: Colors.black),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
-                              SizedBox(width: 150, child: Text('Car Owner :')),
+                              const SizedBox(width: 150, child: Text('Car Owner :')),
                               Text(post!.ownerName.toString()),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Row(
@@ -252,31 +247,31 @@ class ShowDetails extends StatelessWidget {
                                       await launchUrl(Uri.parse(
                                           'tel:+2${post!.ownerMobile}'));
                                     },
-                                    child:
-                                        Icon(Icons.phone, color: Colors.white),
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color.fromRGBO(36, 54, 101, 1.0)),
-                                    )),
+                                          WidgetStateProperty.all(
+                                              const Color.fromRGBO(36, 54, 101, 1.0)),
+                                    ),
+                                    child:
+                                        const Icon(Icons.phone, color: Colors.white)),
                               ),
-                              SizedBox(width: 20),
+                              const SizedBox(width: 20),
                               Expanded(
                                 child: TextButton(
                                     onPressed: () async {
                                       await launchUrl(Uri.parse(
                                           'sms:+2${post!.ownerMobile}'));
                                     },
-                                    child: Icon(Icons.sms, color: Colors.white),
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
+                                          WidgetStateProperty.all(
                                               Color.fromRGBO(36, 54, 101, 1.0)),
-                                    )),
+                                    ),
+                                    child: const Icon(Icons.sms, color: Colors.white)),
                               )
                             ],
                           ),
-                          SizedBox(height: 20)
+                          const SizedBox(height: 20)
                         ],
                       ),
                     )
@@ -284,7 +279,7 @@ class ShowDetails extends StatelessWidget {
                 ),
               ),
             )
-          : Center(
+          : const Center(
               child: Text(
               'No Internet Connection',
               style: TextStyle(fontSize: 30, color: Colors.grey),
