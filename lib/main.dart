@@ -8,12 +8,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     name: "carstore",
       options: const FirebaseOptions(
-          apiKey: "AIzaSyD8qOtONA0QI1KzsZrG0NaqdgpRck4dEOU",
+          apiKey: "AIzaSyD8yrikgobvCk4K9DsCymahjnep3jn-G3Y",
           authDomain: "carstore-16676.firebaseapp.com",
           projectId: "carstore-16676",
           storageBucket: "carstore-16676.appspot.com",
           messagingSenderId: "903972850603",
-          appId: "1:903972850603:web:664bb4a11ca1758cae20ee",
+          appId: "1:903972850603:android:a68feeb525f075a0ae20ee",
           measurementId: "G-B18TCT8XEB")
   );
   runApp(GetMaterialApp(

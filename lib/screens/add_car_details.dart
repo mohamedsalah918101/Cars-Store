@@ -220,6 +220,7 @@ class AddPost extends StatelessWidget {
           "Sell Your Car",
           style: TextStyle(color: Colors.white),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body:Obx(() => connectivityController.isConnected.value ?SingleChildScrollView(
         child: Padding(

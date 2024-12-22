@@ -26,6 +26,7 @@ class ShowDetails extends StatelessWidget {
           "Details",
           style: TextStyle(color: Colors.white),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           if (post?.ownerName == '${firestoreController.user.value.firstName!} ${firestoreController.user.value.lastName!}')
             IconButton(

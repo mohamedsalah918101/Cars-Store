@@ -225,6 +225,7 @@ class EditPost extends StatelessWidget {
             "Edit or Delete Post",
             style: TextStyle(color: Colors.white),
           ),
+          iconTheme: const IconThemeData(color: Colors.white),
           actions: [
             IconButton(
               onPressed: () {
